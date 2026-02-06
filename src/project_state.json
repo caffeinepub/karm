@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Refine the KARM ultra-premium black landing page toward Apple-level polish, but remove all images/mockups entirely (no hero/showcase visuals) and drop the in-UI admin panel; use a single fixed APK download link (Google Drive) for the primary CTA.",
+  "architectural_notes": [
+    "Landing page must follow strict black aesthetic (#000000 / #050607), white/soft-grey typography, minimal subtle glow, glassmorphism, huge spacing, no bright colors/cheap gradients, and production-ready feel.",
+    "Include smooth scroll, fade/parallax, and subtle cursor glow effects while keeping performance fast and responsive.",
+    "Primary CTA: Download APK; secondary CTA: Watch demo / See how it works.",
+    "CTA language should emphasize proof and entry (e.g., “Watch Proof”, “Enter KARM”) and include a cold killer sub-line under CTAs (e.g., “If you open this, you work.” / “Built for people who are done negotiating with themselves.”).",
+    "Motion should be subtle and premium: reduce visible particle motion, use slow fades and cinematic scroll beats (fullscreen text moments) rather than constant obvious effects.",
+    "Provide a simple, documented way to swap in user-provided links (CTAs/social) and image assets (hero/showcase) without editing multiple components (e.g., single config file or centralized constants).",
+    "Remove all images and mockups from the landing page (no hero/showcase screenshot assets); rely on typography/layout/motion only.",
+    "Primary CTA (Download APK / Enter KARM) must use this fixed URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link",
+    "Do not include an in-UI admin/settings panel for updating links/images."
+  ],
+  "known_issues": [
+    "Hero background particles currently read as cheap/starfield from a free particle library; too many and too visible.",
+    "Hero wordmark/logo treatment feels plain (basic white bold) and lacks identity.",
+    "Hero right-side images/mockups feel like AI stock and reduce credibility; needs real screenshots.",
+    "CTA buttons feel flat and not premium (missing glass depth/glow/hover behavior).",
+    "Page lacks an explicit credibility/proof section and cinematic scroll beat to elevate perceived legitimacy."
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-responsive-landing-page-for-the-productivity-app-karm-with-an-ultra-premium-minimalist-black-aesthetic-dominant-000000-050607-tones-white-soft-grey-typography-huge-spacing-and-no-clutter-or-bright-colors-the-overall-feel-must-be-cinematic-apple-level-minimal-luxury-tech-and-discipline-driven",
+      "title": "Create a single-page, responsive landing page for the productivity app “KARM” with an ultra-premium minimalist black aesthetic (dominant #000000 / #050607 tones), white + soft grey typography, huge spacing, and no clutter or bright colors; the overall feel must be cinematic, Apple-level minimal, luxury-tech, and discipline-driven.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-landing-page-sections-in-this-order-with-the-provided-english-copy-maintaining-the-specified-tone-cold-powerful-minimal-1-hero-fullscreen-with-brand-name-karm-tagline-stop-overthinking-start-working-subtext-an-environment-that-removes-distraction-and-forces-execution-plus-an-additional-line-start-a-focus-session-in-2-seconds-include-ctas-download-apk-primary-and-watch-demo-secondary-2-problem-section-headline-you-don-t-lack-motivation-you-lack-an-environment-with-supporting-lines-describing-planning-thinking-not-starting-and-that-karm-removes-friction-include-three-minimal-icon-items-distraction-overthinking-delay-3-product-showcase-most-important-feature-blocks-one-tap-focus-timer-workspace-mode-taskflow-system-distraction-proof-environment-each-paired-with-a-clear-ui-mockup-image-4-transformation-section-headline-discipline-becomes-inevitable-and-copy-emphasizing-environment-over-motivation-include-a-minimal-before-after-list-before-scrolling-delay-chaos-after-start-focus-execution-5-for-who-minimal-cards-for-students-builders-solo-founders-anyone-serious-about-execution-6-final-cta-centered-text-you-already-know-what-you-need-to-do-start-with-button-download-karm-apk-and-subtext-free-no-signup-just-start-working",
+      "title": "Implement the landing page sections in this order with the provided English copy, maintaining the specified tone (cold, powerful, minimal): (1) Hero (fullscreen) with brand name “KARM”, tagline “Stop overthinking. Start working.”, subtext “An environment that removes distraction and forces execution.” plus an additional line “Start a focus session in 2 seconds.”; include CTAs “Download APK” (primary) and “Watch demo” (secondary). (2) Problem section: headline “You don’t lack motivation. You lack an environment.” with supporting lines describing planning/thinking/not starting and that KARM removes friction; include three minimal icon items: “Distraction”, “Overthinking”, “Delay”. (3) Product Showcase (most important): feature blocks “One tap focus timer”, “Workspace mode”, “Taskflow system”, “Distraction-proof environment”, each paired with a clear UI mockup image. (4) Transformation section: headline “Discipline becomes inevitable.” and copy emphasizing environment over motivation; include a minimal before/after list: Before “Scrolling / Delay / Chaos”, After “Start / Focus / Execution”. (5) For Who: minimal cards for “Students”, “Builders”, “Solo founders”, “Anyone serious about execution”. (6) Final CTA: centered text “You already know what you need to do. Start.” with button “Download KARM APK” and subtext “Free. No signup. Just start working.”",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-cinematic-slow-premium-feeling-motion-smooth-scrolling-to-anchored-sections-fade-slide-in-section-reveals-on-scroll-subtle-parallax-on-hero-mockups-background-accents-and-a-subtle-cursor-glow-effect-that-does-not-introduce-bright-colors-or-visual-noise",
+      "title": "Add cinematic, slow, premium-feeling motion: smooth scrolling to anchored sections, fade/slide-in section reveals on scroll, subtle parallax on hero mockups/background accents, and a subtle cursor glow effect that does not introduce bright colors or visual noise.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-hero-background-treatment-minimal-black-background-with-subtle-moving-particles-or-a-very-subtle-glow-accent-plus-a-floating-premium-app-mockup-composition-showing-a-timer-workspace-feel-ensure-the-hero-is-readable-and-maintains-the-silent-disciplined-brand-vibe",
+      "title": "Create the Hero background treatment: minimal black background with subtle moving particles or a very subtle glow accent, plus a floating premium app mockup composition showing a timer + workspace feel. Ensure the hero is readable and maintains the “silent, disciplined” brand vibe.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-include-the-requested-realistic-black-premium-themed-product-mockup-images-as-static-frontend-assets-and-render-them-in-the-appropriate-sections-hero-and-product-showcase-plus-any-supporting-visuals-where-tasteful-without-routing-image-delivery-through-the-backend",
+      "title": "Generate and include the requested realistic black-premium themed product/mockup images as static frontend assets, and render them in the appropriate sections (Hero and Product Showcase, plus any supporting visuals where tasteful) without routing image delivery through the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-production-ready-layout-and-performance-basics-responsive-typography-scale-optimized-image-sizing-loading-accessible-color-contrast-and-a-clean-component-structure-sections-as-reusable-components-while-adhering-to-the-template-s-immutable-paths-do-not-modify-files-under-frontend-src-components-ui-or-the-listed-immutable-hooks-entry-files",
+      "title": "Implement production-ready layout and performance basics: responsive typography scale, optimized image sizing/loading, accessible color contrast, and a clean component structure (sections as reusable components) while adhering to the template’s immutable paths (do not modify files under frontend/src/components/ui or the listed immutable hooks/entry files).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-refine-the-hero-background-particle-system-to-feel-like-subtle-blurred-dust-not-a-visible-starfield-reduce-particle-count-by-60-slow-movement-add-blur-softness-and-keep-motion-minimally-perceptible-preserve-the-black-background-and-readability",
+      "title": "Refine the hero background particle system to feel like subtle blurred dust (not a visible starfield): reduce particle count by ~60%, slow movement, add blur/softness, and keep motion minimally perceptible; preserve the black background and readability.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-upgrade-the-hero-wordmark-treatment-for-karm-to-add-identity-while-staying-minimal-by-implementing-option-a-add-a-subtle-low-opacity-blue-white-aura-glow-behind-the-wordmark-no-bright-colors-no-noisy-gradients",
+      "title": "Upgrade the hero wordmark treatment for “KARM” to add identity while staying minimal by implementing Option A: add a subtle, low-opacity blue/white aura glow behind the wordmark (no bright colors, no noisy gradients).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-hero-right-side-visuals-and-product-showcase-visuals-that-currently-look-like-ai-stock-mockups-with-real-in-app-screenshot-assets-timer-workspace-analytics-and-one-additional-proof-screen-such-as-habit-focus-line-presented-as-floating-artifacts-on-dark-glass-panels",
+      "title": "Replace hero right-side visuals and product showcase visuals that currently look like AI/stock mockups with real in-app screenshot assets (timer, workspace, analytics, and one additional proof screen such as habit/focus-line), presented as floating artifacts on dark glass panels.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-primary-hero-cta-download-apk-feel-premium-with-glass-depth-add-slight-blur-depth-shadow-a-soft-glow-pulse-about-every-4-seconds-and-a-hover-light-spread-interaction-keep-the-design-minimal-and-on-brand-apply-a-consistent-premium-cta-style-to-the-final-cta-as-well",
+      "title": "Make the primary hero CTA (“Download APK”) feel premium with glass depth: add slight blur, depth/shadow, a soft glow pulse about every 4 seconds, and a “hover light spread” interaction; keep the design minimal and on-brand. Apply a consistent premium CTA style to the final CTA as well.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-hero-cta-copy-and-add-the-requested-killer-line-under-the-hero-ctas-change-secondary-cta-text-from-watch-demo-to-watch-proof-add-a-small-cold-line-under-the-hero-buttons-if-you-open-this-you-work-add-a-small-bottom-of-hero-line-v1-built-by-a-student-for-people-who-refuse-to-stay-average",
+      "title": "Update hero CTA copy and add the requested “killer line” under the hero CTAs: change secondary CTA text from “Watch demo” to “Watch Proof”; add a small cold line under the hero buttons: “If you open this, you work.”; add a small bottom-of-hero line: “v1 — built by a student. for people who refuse to stay average.”",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-new-cinematic-scroll-narrative-sections-and-restructure-the-landing-page-flow-to-match-the-user-provided-structure-after-the-hero-add-a-fullscreen-psychological-hit-scroll-section-most-people-wait-you-don-t-you-start-then-ui-appears-then-a-minimal-3-block-what-it-does-section-start-in-2-seconds-discipline-becomes-visible-you-vs-you-with-the-provided-copy-then-a-centered-cult-line-section-then-a-lightweight-social-proof-section-with-the-provided-raw-bullet-lines-followed-by-the-final-cta-screen",
+      "title": "Implement the new cinematic scroll narrative sections and restructure the landing page flow to match the user-provided structure: after the hero, add a fullscreen “psychological hit” scroll section (Most people wait… You don’t… You start… then UI appears), then a minimal 3-block “what it does” section (Start in 2 seconds / Discipline becomes visible / You vs you with the provided copy), then a centered “cult line” section, then a lightweight “social proof” section with the provided raw bullet lines, followed by the final CTA screen.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-final-cta-screen-to-match-the-requested-copy-and-interaction-headline-you-already-know-what-you-need-to-do-and-a-primary-button-labeled-enter-karm-that-triggers-the-apk-download-action-same-download-target-as-the-hero-primary-cta-avoid-signup-get-started-language",
+      "title": "Update the final CTA screen to match the requested copy and interaction: headline “You already know what you need to do.” and a primary button labeled “Enter KARM” that triggers the APK download action (same download target as the hero primary CTA). Avoid signup/get-started language.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-single-centralized-developer-editable-config-module-that-controls-all-customizable-external-internal-links-used-by-the-landing-page-e-g-apk-download-url-filename-and-the-secondary-cta-target-so-a-user-can-update-links-without-hunting-through-multiple-components",
+      "title": "Create a single, centralized, developer-editable config module that controls all customizable external/internal links used by the landing page (e.g., APK download URL/filename and the secondary CTA target), so a user can update links without hunting through multiple components.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-hero-and-landing-section-images-hero-floating-mockups-what-it-does-block-images-configurable-via-the-same-centralized-config-using-static-asset-paths-so-users-can-replace-images-by-dropping-files-into-the-public-folder-and-updating-config-paths",
+      "title": "Make hero and landing-section images (hero floating mockups + “What it does” block images) configurable via the same centralized config, using static asset paths so users can replace images by dropping files into the public folder and updating config paths.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-clear-in-repo-instructions-explaining-exactly-how-a-user-can-add-replace-images-and-update-links-including-where-to-place-files-in-frontend-public-and-which-config-fields-to-edit-using-english-and-referencing-the-exact-paths-in-this-project",
+      "title": "Add clear in-repo instructions explaining exactly how a user can add/replace images and update links (including where to place files in frontend/public and which config fields to edit), using English and referencing the exact paths in this project.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-in-ui-admin-panel-from-the-application-so-end-users-cannot-see-or-interact-with-any-configuration-ui",
+      "title": "Remove the in-UI Admin Panel from the application so end users cannot see or interact with any configuration UI.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-apk-download-actions-to-use-the-single-fixed-google-drive-url-https-drive-google-com-file-d-1hfhzkqisxb-80s6kiqhzfskxi3s24qa7-view-usp-drive-link",
+      "title": "Update all APK download actions to use the single fixed Google Drive URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-all-images-and-mockups-from-the-landing-page-ui-so-the-page-renders-with-no-image-assets-no-phone-mockups-no-showcase-images-no-ui-screenshots-keep-the-typography-driven-ultra-minimal-black-aesthetic-intact",
+      "title": "Remove all images and mockups from the landing page UI so the page renders with no image assets (no phone mockups, no showcase images, no UI screenshots). Keep the typography-driven, ultra-minimal black aesthetic intact.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-any-customization-documentation-and-configuration-modules-to-reflect-the-new-fixed-link-no-images-behavior-remove-references-to-replacing-images-and-using-the-admin-panel-localstorage-editing-all-documentation-must-be-in-english-and-reference-the-exact-google-drive-url-as-the-apk-link",
+      "title": "Update any customization documentation and configuration modules to reflect the new fixed-link, no-images behavior (remove references to replacing images and using the Admin Panel / localStorage editing). All documentation must be in English and reference the exact Google Drive URL as the APK link.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Design and implement a responsive ultra-premium black landing page for KARM (hero, problem, showcase, transformation, audience, final CTA) with cinematic animations and glassmorphism.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Refine hero background particles to feel premium (reduce count ~60%, slower movement, add blur; dust-in-space not stars) and add a subtle blue/white aura behind center elements without introducing bright colors.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Upgrade hero branding/typography treatment for the “KARM” wordmark (subtle glow OR metallic gradient OR faint light-pass animation every ~6s) to add identity while staying minimal.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Make primary CTA button feel premium (glass depth, slight blur, hover light spread, soft glow pulse ~4s) and adjust CTA copy: secondary “Watch Proof” (not demo); optionally final CTA button label “Enter KARM”.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add credibility + cinematic scroll narrative sections: a “Real sessions. Real discipline.” proof block, a fullscreen psychological hit scroll sequence (Most people wait… You don’t… You start…), minimal 3-block ‘what it does’ section, cult-line section, and lightweight social proof copy.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Enable easy customization of landing-page links and images (user-provided URLs/assets) with clear instructions or a simple config-driven approach.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "KARM",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

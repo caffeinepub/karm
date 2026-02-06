@@ -1,0 +1,127 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Remove admin/config UI, remove landing images, and hardcode Google Drive APK link",
+  "requirements": [
+    {
+      "id": "REQ-17",
+      "summary": "Remove the in-UI Admin Panel so end users cannot access any configuration UI.",
+      "acceptanceCriteria": [
+        "The AdminPanel component is not rendered anywhere in the app UI (including on the LandingPage).",
+        "No floating panel / config editor appears on any viewport size.",
+        "Any routes/entry points that previously showed the admin panel no longer do so."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Remove the AdminPanel import and JSX render so no admin/config UI is mounted anywhere in the app."
+        },
+        {
+          "path": "frontend/src/components/admin/AdminPanel.tsx",
+          "operation": "delete",
+          "description": "Remove the AdminPanel implementation so it cannot be reintroduced via import/render from elsewhere."
+        }
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "summary": "Hardcode all APK download actions to a single fixed Google Drive URL and remove runtime/localStorage-configured download behavior.",
+      "acceptanceCriteria": [
+        "Clicking the primary CTA in the Hero section triggers a download/navigation using the exact Google Drive URL provided.",
+        "Clicking the primary CTA in the Final CTA section triggers a download/navigation using the exact Google Drive URL provided.",
+        "There are no remaining code paths that read the APK download URL from localStorage or an admin-edited config at runtime."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/landing/download.ts",
+          "operation": "modify",
+          "description": "Replace LANDING_CONFIG-based download logic with a fixed exported constant using the exact Google Drive URL (https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link) and a single helper that navigates to it (avoid localStorage/config-driven URL selection)."
+        },
+        {
+          "path": "frontend/src/components/landing/landingConfig.ts",
+          "operation": "modify",
+          "description": "Remove customizable download/image configuration and any documentation-style comments implying runtime customization; define/ export the fixed Google Drive APK URL constant here (or re-export from download.ts) so the location is explicit in code."
+        },
+        {
+          "path": "frontend/src/components/landing/sections/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Remove localStorage config loading and update the primary CTA to use the shared fixed-link helper (from frontend/src/components/landing/download.ts) so it always navigates to the exact Google Drive URL."
+        },
+        {
+          "path": "frontend/src/components/landing/sections/FinalCTASection.tsx",
+          "operation": "modify",
+          "description": "Remove localStorage config loading and update the CTA button to use the shared fixed-link helper (from frontend/src/components/landing/download.ts) so it always navigates to the exact Google Drive URL."
+        },
+        {
+          "path": "frontend/src/components/landing/hero/FloatingMockups.tsx",
+          "operation": "delete",
+          "description": "Remove the mockups component to eliminate any remaining mockup image configuration and any localStorage-based image paths."
+        },
+        {
+          "path": "frontend/src/components/landing/sections/WhatItDoesSection.tsx",
+          "operation": "modify",
+          "description": "Remove localStorage-based image override logic and remove any remaining image-driven configuration usage so no runtime config (localStorage/admin) affects the landing page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Remove all images and mockups from the landing page while keeping the ultra-minimal black aesthetic.",
+      "acceptanceCriteria": [
+        "The Hero section does not render any floating mockup/phone images.",
+        "The Psychological Hit section does not render any revealed UI image/screenshot.",
+        "The What It Does section does not render any images for its blocks.",
+        "No <img> elements (or CSS background images) are used for product mockups/screenshots anywhere on the landing page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/landing/sections/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Remove the FloatingMockups render (and associated layout spacing if needed) so the Hero renders with typography-only content and no image/mockup elements."
+        },
+        {
+          "path": "frontend/src/components/landing/sections/PsychologicalHitSection.tsx",
+          "operation": "modify",
+          "description": "Remove the UI reveal block that renders an <img> and any state/logic solely used to reveal images; keep the typography/animation experience intact without images."
+        },
+        {
+          "path": "frontend/src/components/landing/sections/WhatItDoesSection.tsx",
+          "operation": "modify",
+          "description": "Remove the three <img> blocks and adjust layout so each feature block is text-only (title/description) while preserving the minimal black aesthetic."
+        },
+        {
+          "path": "frontend/src/components/landing/landingCopy.ts",
+          "operation": "modify",
+          "description": "Remove or stop using image fields from landing copy for feature blocks so the copy model matches the no-images landing page behavior."
+        },
+        {
+          "path": "frontend/src/components/landing/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Verify the composed landing sections no longer include any image-based components and that the page renders without <img> elements or CSS background images tied to mockups/screenshots."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Update customization documentation and configuration modules to reflect fixed-link and no-images behavior (English, with exact Google Drive URL).",
+      "acceptanceCriteria": [
+        "Documentation no longer instructs users to use the Admin Panel to edit links/images.",
+        "Documentation no longer instructs users to add/replace landing page images for mockups/showcase blocks.",
+        "Documentation clearly states the APK download link is fixed to the provided Google Drive URL and indicates where it is defined in code."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/docs/landing-customization.md",
+          "operation": "modify",
+          "description": "Rewrite the guide in English to remove Admin Panel/localStorage/image replacement instructions; document that the APK link is fixed to https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link and point to where it is defined (e.g., frontend/src/components/landing/download.ts and/or frontend/src/components/landing/landingConfig.ts)."
+        },
+        {
+          "path": "frontend/src/components/landing/landingConfig.ts",
+          "operation": "modify",
+          "description": "Update module comments/structure to reflect fixed-link, no-images behavior (remove references to replacing images, mockups, and localStorage-based editing)."
+        }
+      ]
+    }
+  ]
+}

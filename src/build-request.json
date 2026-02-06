@@ -1,0 +1,104 @@
+{
+  "kind": "build_request",
+  "title": "Remove landing page images and admin panel; use a single fixed Google Drive APK download link",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-17",
+      "text": "Remove the in-UI Admin Panel from the application so end users cannot see or interact with any configuration UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "remove all the images and mockups and even admin panel"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The AdminPanel component is not rendered anywhere in the app UI (including on the LandingPage).",
+        "No floating panel / config editor appears on any viewport size.",
+        "Any routes/entry points that previously showed the admin panel no longer do so."
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Update all APK download actions to use the single fixed Google Drive URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "just use this link for downloading apk \"https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link\""
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking the primary CTA in the Hero section triggers a download/navigation using the exact Google Drive URL provided.",
+        "Clicking the primary CTA in the Final CTA section triggers a download/navigation using the exact Google Drive URL provided.",
+        "There are no remaining code paths that read the APK download URL from localStorage or an admin-edited config at runtime."
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Remove all images and mockups from the landing page UI so the page renders with no image assets (no phone mockups, no showcase images, no UI screenshots). Keep the typography-driven, ultra-minimal black aesthetic intact.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "remove all the images and mockups"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Hero section does not render any floating mockup/phone images.",
+        "The Psychological Hit section does not render any revealed UI image/screenshot.",
+        "The What It Does section does not render any images for its blocks.",
+        "No <img> elements (or CSS background images) are used for product mockups/screenshots anywhere on the landing page."
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Update any customization documentation and configuration modules to reflect the new fixed-link, no-images behavior (remove references to replacing images and using the Admin Panel / localStorage editing). All documentation must be in English and reference the exact Google Drive URL as the APK link.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "remove all the images and mockups and even admin panel just use this link for downloading apk"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Documentation no longer instructs users to use the Admin Panel to edit links/images.",
+        "Documentation no longer instructs users to add/replace landing page images for mockups/showcase blocks.",
+        "Documentation clearly states the APK download link is fixed to the provided Google Drive URL and indicates where it is defined in code."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/components/ui.",
+    "Do not modify immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Backend remains single-actor; do not introduce additional backend services (no backend changes expected for this request)."
+  ],
+  "nonGoals": [
+    "Do not add new images, mockups, or screenshot assets.",
+    "Do not add a replacement admin/settings screen for editing links or images.",
+    "Do not implement backend-stored configuration; the APK link must remain a fixed constant in the frontend codebase."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
