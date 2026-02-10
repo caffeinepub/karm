@@ -8,9 +8,9 @@ The KARM landing page is a minimal, black-themed single-page application with no
 
 ## APK Download Link
 
-The APK download link is fixed and points to a Google Drive file. All download buttons on the landing page use this same link.
+The APK download link is fixed and points to a Mega file. All download buttons on the landing page use this same link.
 
-**Current link:** `https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link`
+**Current link:** `https://mega.nz/file/mNUmCL7D#8S_NdNQ4MJe-3tprEFLy3UPBq6QJoVT3D5TNfo7gCLw`
 
 ### How to Change the Download Link
 
@@ -19,3 +19,4 @@ The APK download link is fixed and points to a Google Drive file. All download b
 3. Save the file
 
 Example:
+

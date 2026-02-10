@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Remove all landing page imagery and the in-UI admin/config panel, and hardcode a single fixed Google Drive APK download link across the app.
+**Goal:** Update the landing page by inserting a new Three.js ASCII “KARM” section above Social Proof and adding the provided Cult Line image above the Cult Line heading.
 
 **Planned changes:**
-- Remove the AdminPanel UI/component from all pages/routes so no configuration or floating editor is visible to end users.
-- Update all APK download CTAs (Hero and Final CTA) to navigate to the single fixed Google Drive URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link
-- Remove all landing page images/mockups/screenshots (including any `<img>` usage or CSS background images) while keeping the ultra-minimal black, typography-driven aesthetic.
-- Update any customization/config documentation or modules to remove Admin Panel/localStorage/image-replacement references and document the fixed APK link in English.
+- Add a new Three.js-based ASCIIText React component (ported from the provided snippet) and render it as a full-width, responsive landing section with text "KARM" using `enableWaves={false}` and `asciiFontSize={7}`, placed above the Social Proof section (above the “Used during real study sessions” line).
+- Ensure the ASCIIText component properly cleans up resources on unmount (animation loop and event listeners) and does not overflow horizontally on mobile/desktop.
+- Insert the user-provided image as a static frontend asset into the CultLineSection area, positioned above the heading and styled to match the dark landing aesthetic (centered, responsive, sensible max-width/spacing).
+- Ensure the Cult Line heading copy matches exactly: "Built for people who are done negotiating with themselves." and keep user-facing text in English.
 
-**User-visible outcome:** Users see a fully minimal, text-focused landing page with no images and no admin/config UI; all download buttons take them to the same fixed Google Drive APK link.
+**User-visible outcome:** The landing page shows a new animated ASCII “KARM” section above Social Proof, and the Cult Line section displays the provided image above the “Built for people who are done negotiating with themselves.” heading.

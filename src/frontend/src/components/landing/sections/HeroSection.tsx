@@ -1,7 +1,7 @@
 import { ArrowRight, Download } from 'lucide-react';
 import Section from '../Section';
 import ResponsiveContainer from '../ResponsiveContainer';
-import HeroBackground from '../hero/HeroBackground';
+import FaultyTerminal from '../hero/FaultyTerminal';
 import { downloadAPK } from '../download';
 import { LANDING_CONFIG } from '../landingConfig';
 
@@ -18,7 +18,28 @@ export default function HeroSection() {
 
   return (
     <Section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <HeroBackground />
+      {/* FaultyTerminal Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <FaultyTerminal
+          scale={1.5}
+          gridMul={[2, 1]}
+          digitSize={1.2}
+          timeScale={0.5}
+          pause={false}
+          scanlineIntensity={0.5}
+          glitchAmount={1}
+          flickerAmount={1}
+          noiseAmp={1}
+          chromaticAberration={0}
+          dither={0}
+          curvature={0.1}
+          tint="#f0a3e6"
+          mouseReact
+          mouseStrength={0.5}
+          pageLoadAnimation
+          brightness={0.6}
+        />
+      </div>
 
       <ResponsiveContainer className="relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 py-20">

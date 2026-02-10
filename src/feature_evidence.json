@@ -2,11 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-in-ui-admin-panel-from-the-application-so-end-users-cannot-see-or-interact-with-any-configuration-ui",
-      "featureTitle": "Remove the in-UI Admin Panel from the application so end users cannot see or interact with any configuration UI.",
+      "featureId": "feature-add-a-new-three-js-based-ascii-text-react-component-ported-from-the-provided-codepen-based-snippet-and-render-it-with-the-text-karm-enablewaves-false-asciifontsize-7-in-a-new-full-width-section-placed-above-the-section-that-contains-the-line-used-during-real-study-sessions-i-e-above-socialproofsection-in-the-landing-page-flow",
+      "featureTitle": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/admin/AdminPanel.tsx"
+        "frontend/src/components/landing/LandingPage.tsx",
+        "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
+        "frontend/src/components/landing/three/AsciiText.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,20 +17,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-17"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-all-apk-download-actions-to-use-the-single-fixed-google-drive-url-https-drive-google-com-file-d-1hfhzkqisxb-80s6kiqhzfskxi3s24qa7-view-usp-drive-link",
-      "featureTitle": "Update all APK download actions to use the single fixed Google Drive URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link",
+      "featureId": "feature-insert-the-user-provided-uploaded-image-into-the-built-for-people-who-are-done-negotiating-with-themselves-cultlinesection-area-positioned-above-that-line-and-style-it-to-fit-the-existing-dark-landing-aesthetic-centered-responsive-with-appropriate-max-width-and-spacing",
+      "featureTitle": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
       "files": [
-        "frontend/src/components/landing/download.ts",
-        "frontend/src/components/landing/hero/FloatingMockups.tsx",
-        "frontend/src/components/landing/landingConfig.ts",
-        "frontend/src/components/landing/sections/FinalCTASection.tsx",
-        "frontend/src/components/landing/sections/HeroSection.tsx",
-        "frontend/src/components/landing/sections/WhatItDoesSection.tsx"
+        "frontend/src/components/landing/sections/CultLineSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -39,18 +35,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-18"
+        "REQ-2"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-all-images-and-mockups-from-the-landing-page-ui-so-the-page-renders-with-no-image-assets-no-phone-mockups-no-showcase-images-no-ui-screenshots-keep-the-typography-driven-ultra-minimal-black-aesthetic-intact",
-      "featureTitle": "Remove all images and mockups from the landing page UI so the page renders with no image assets (no phone mockups, no showcase images, no UI screenshots). Keep the typography-driven, ultra-minimal black aesthetic intact.",
+      "featureId": "feature-ensure-the-cult-line-heading-copy-uses-the-exact-sentence-case-and-punctuation-built-for-people-who-are-done-negotiating-with-themselves-and-keep-all-user-facing-text-in-english",
+      "featureTitle": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
       "files": [
-        "frontend/src/components/landing/landingCopy.ts",
-        "frontend/src/components/landing/sections/HeroSection.tsx",
-        "frontend/src/components/landing/sections/PsychologicalHitSection.tsx",
-        "frontend/src/components/landing/sections/WhatItDoesSection.tsx"
+        "frontend/src/components/landing/sections/CultLineSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -60,26 +53,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-19"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-any-customization-documentation-and-configuration-modules-to-reflect-the-new-fixed-link-no-images-behavior-remove-references-to-replacing-images-and-using-the-admin-panel-localstorage-editing-all-documentation-must-be-in-english-and-reference-the-exact-google-drive-url-as-the-apk-link",
-      "featureTitle": "Update any customization documentation and configuration modules to reflect the new fixed-link, no-images behavior (remove references to replacing images and using the Admin Panel / localStorage editing). All documentation must be in English and reference the exact Google Drive URL as the APK link.",
-      "files": [
-        "frontend/docs/landing-customization.md",
-        "frontend/src/components/landing/landingConfig.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-20"
+        "REQ-3"
       ],
       "confidence": "high"
     }

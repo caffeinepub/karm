@@ -1,6 +1,7 @@
 import HeroSection from './sections/HeroSection';
 import PsychologicalHitSection from './sections/PsychologicalHitSection';
 import WhatItDoesSection from './sections/WhatItDoesSection';
+import AsciiKarmSection from './sections/AsciiKarmSection';
 import CultLineSection from './sections/CultLineSection';
 import SocialProofSection from './sections/SocialProofSection';
 import FinalCTASection from './sections/FinalCTASection';
@@ -13,6 +14,7 @@ export default function LandingPage() {
       <HeroSection />
       <PsychologicalHitSection />
       <WhatItDoesSection />
+      <AsciiKarmSection />
       <CultLineSection />
       <SocialProofSection />
       <FinalCTASection />

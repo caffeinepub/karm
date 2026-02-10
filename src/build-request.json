@@ -1,94 +1,78 @@
 {
   "kind": "build_request",
-  "title": "Remove landing page images and admin panel; use a single fixed Google Drive APK download link",
+  "title": "Insert Cult Line image and add Three.js ASCIIText 'KARM' section above Social Proof",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-17",
-      "text": "Remove the in-UI Admin Panel from the application so end users cannot see or interact with any configuration UI.",
+      "id": "REQ-1",
+      "text": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "recent-messages"
+          "msg-3"
         ],
         "quotes": [
-          "remove all the images and mockups and even admin panel"
+          "add the image im giving you now and also im giving a code for ASCII text make that similar one but with the text KARM",
+          "you put this above the section where we have written used during real study sessions"
         ]
       },
       "acceptanceCriteria": [
-        "The AdminPanel component is not rendered anywhere in the app UI (including on the LandingPage).",
-        "No floating panel / config editor appears on any viewport size.",
-        "Any routes/entry points that previously showed the admin panel no longer do so."
+        "Landing page order renders the ASCIIText section before the Social Proof section (before the lines that include \"Used during real study sessions\").",
+        "ASCIIText renders the word \"KARM\" (not the default text) and respects props: enableWaves={false} and asciiFontSize={7}.",
+        "The ASCIIText component cleans up WebGL/DOM resources on unmount (no runaway requestAnimationFrame; event listeners removed).",
+        "The section is responsive: it has a stable height on mobile/desktop and does not overflow horizontally."
       ]
     },
     {
-      "id": "REQ-18",
-      "text": "Update all APK download actions to use the single fixed Google Drive URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link",
+      "id": "REQ-2",
+      "text": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "recent-messages"
+          "msg-3"
         ],
         "quotes": [
-          "just use this link for downloading apk \"https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link\""
+          "above that line, built for people who are done negotiating with themselves add the image im giving you now"
         ]
       },
       "acceptanceCriteria": [
-        "Clicking the primary CTA in the Hero section triggers a download/navigation using the exact Google Drive URL provided.",
-        "Clicking the primary CTA in the Final CTA section triggers a download/navigation using the exact Google Drive URL provided.",
-        "There are no remaining code paths that read the APK download URL from localStorage or an admin-edited config at runtime."
+        "The image is displayed above the CultLineSection heading text (\"Built for people who are done negotiating with themselves.\").",
+        "The image is served as a static frontend asset (not via backend) and loads correctly in production build.",
+        "The image is responsive (keeps aspect ratio, has sensible max width, and does not cause layout shift beyond normal image loading)."
       ]
     },
     {
-      "id": "REQ-19",
-      "text": "Remove all images and mockups from the landing page UI so the page renders with no image assets (no phone mockups, no showcase images, no UI screenshots). Keep the typography-driven, ultra-minimal black aesthetic intact.",
+      "id": "REQ-3",
+      "text": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "recent-messages"
+          "msg-3"
         ],
         "quotes": [
-          "remove all the images and mockups"
+          "built for people who are done negotiating with themselves"
         ]
       },
       "acceptanceCriteria": [
-        "The Hero section does not render any floating mockup/phone images.",
-        "The Psychological Hit section does not render any revealed UI image/screenshot.",
-        "The What It Does section does not render any images for its blocks.",
-        "No <img> elements (or CSS background images) are used for product mockups/screenshots anywhere on the landing page."
-      ]
-    },
-    {
-      "id": "REQ-20",
-      "text": "Update any customization documentation and configuration modules to reflect the new fixed-link, no-images behavior (remove references to replacing images and using the Admin Panel / localStorage editing). All documentation must be in English and reference the exact Google Drive URL as the APK link.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "recent-messages"
-        ],
-        "quotes": [
-          "remove all the images and mockups and even admin panel just use this link for downloading apk"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Documentation no longer instructs users to use the Admin Panel to edit links/images.",
-        "Documentation no longer instructs users to add/replace landing page images for mockups/showcase blocks.",
-        "Documentation clearly states the APK download link is fixed to the provided Google Drive URL and indicates where it is defined in code."
+        "The displayed heading text matches exactly: \"Built for people who are done negotiating with themselves.\"",
+        "No new non-English user-facing strings are introduced as part of this change."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui.",
-    "Do not modify immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
-    "Backend remains single-actor; do not introduce additional backend services (no backend changes expected for this request)."
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Backend must remain single-actor in backend/main.mo; no new backend services.",
+    "Do not route or proxy images through the backend; images must be static frontend assets."
   ],
   "nonGoals": [
-    "Do not add new images, mockups, or screenshot assets.",
-    "Do not add a replacement admin/settings screen for editing links or images.",
-    "Do not implement backend-stored configuration; the APK link must remain a fixed constant in the frontend codebase."
+    "Do not change APK download URL behavior or CTA logic.",
+    "Do not add new authentication flows or backend persistence.",
+    "Do not refactor existing hero FaultyTerminal implementation beyond what is necessary to place the new ASCIIText section."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Cropped/cleaned version of the uploaded screenshot focusing on the central card (karm-whatsapp-card.dim_736x1472.jpg)"
+    ],
     "edits": []
   },
   "userProfileUpdate": {

@@ -1,78 +1,55 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-06T14:06:13.069Z",
+  "generatedAt": "2026-02-10T10:16:48.833Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 4,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-17",
-        "summary": "Remove the in-UI Admin Panel from the application so end users cannot see or interact with any configuration UI.",
+        "id": "REQ-1",
+        "summary": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/components/admin/AdminPanel.tsx"
+          "frontend/src/components/landing/three/AsciiText.tsx",
+          "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
+          "frontend/src/components/landing/LandingPage.tsx",
+          "frontend/src/index.css",
+          "frontend/package.json"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx",
-          "frontend/src/components/admin/AdminPanel.tsx"
-        ]
-      },
-      {
-        "id": "REQ-18",
-        "summary": "Update all APK download actions to use the single fixed Google Drive URL: https://drive.google.com/file/d/1hFHZKQIsXB-80s6kiqhzfsKxi3s24qA7/view?usp=drive_link",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/landing/download.ts",
-          "frontend/src/components/landing/landingConfig.ts",
-          "frontend/src/components/landing/sections/HeroSection.tsx",
-          "frontend/src/components/landing/sections/FinalCTASection.tsx",
-          "frontend/src/components/landing/hero/FloatingMockups.tsx",
-          "frontend/src/components/landing/sections/WhatItDoesSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/landing/download.ts",
-          "frontend/src/components/landing/landingConfig.ts",
-          "frontend/src/components/landing/sections/HeroSection.tsx",
-          "frontend/src/components/landing/sections/FinalCTASection.tsx",
-          "frontend/src/components/landing/hero/FloatingMockups.tsx",
-          "frontend/src/components/landing/sections/WhatItDoesSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-19",
-        "summary": "Remove all images and mockups from the landing page UI so the page renders with no image assets (no phone mockups, no showcase images, no UI screenshots). Keep the typography-driven, ultra-minimal black aesthetic intact.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/landing/sections/HeroSection.tsx",
-          "frontend/src/components/landing/sections/PsychologicalHitSection.tsx",
-          "frontend/src/components/landing/sections/WhatItDoesSection.tsx",
-          "frontend/src/components/landing/landingCopy.ts",
+          "frontend/src/components/landing/three/AsciiText.tsx",
+          "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
           "frontend/src/components/landing/LandingPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/landing/sections/HeroSection.tsx",
-          "frontend/src/components/landing/sections/PsychologicalHitSection.tsx",
-          "frontend/src/components/landing/sections/WhatItDoesSection.tsx",
-          "frontend/src/components/landing/landingCopy.ts"
         ]
       },
       {
-        "id": "REQ-20",
-        "summary": "Update any customization documentation and configuration modules to reflect the new fixed-link, no-images behavior (remove references to replacing images and using the Admin Panel / localStorage editing). All documentation must be in English and reference the exact Google Drive URL as the APK link.",
+        "id": "REQ-2",
+        "summary": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/docs/landing-customization.md",
-          "frontend/src/components/landing/landingConfig.ts"
+          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
+          "frontend/src/components/landing/sections/CultLineSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/docs/landing-customization.md",
-          "frontend/src/components/landing/landingConfig.ts"
+          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
+          "frontend/src/components/landing/sections/CultLineSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/landing/landingCopy.ts",
+          "frontend/src/components/landing/sections/CultLineSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/landing/sections/CultLineSection.tsx"
         ]
       }
     ]
@@ -82,17 +59,11 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/docs/landing-customization.md",
-    "frontend/src/App.tsx",
-    "frontend/src/components/admin/AdminPanel.tsx",
-    "frontend/src/components/landing/download.ts",
-    "frontend/src/components/landing/hero/FloatingMockups.tsx",
-    "frontend/src/components/landing/landingConfig.ts",
-    "frontend/src/components/landing/landingCopy.ts",
-    "frontend/src/components/landing/sections/FinalCTASection.tsx",
-    "frontend/src/components/landing/sections/HeroSection.tsx",
-    "frontend/src/components/landing/sections/PsychologicalHitSection.tsx",
-    "frontend/src/components/landing/sections/WhatItDoesSection.tsx",
+    "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
+    "frontend/src/components/landing/LandingPage.tsx",
+    "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
+    "frontend/src/components/landing/sections/CultLineSection.tsx",
+    "frontend/src/components/landing/three/AsciiText.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
