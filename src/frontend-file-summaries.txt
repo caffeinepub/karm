@@ -22,7 +22,7 @@
   "frontend/src/components/landing/download.ts": "Fixed APK download handler that opens the Mega URL in a new tab with noopener/noreferrer security attributes.",
   "frontend/src/components/landing/sections/PsychologicalHitSection.tsx": "Fullscreen cinematic section that sequentially fades in three psychological lines on scroll (no image reveal).",
   "frontend/src/components/landing/sections/WhatItDoesSection.tsx": "Three-column minimal section showcasing feature blocks with text only (no images).",
-  "frontend/src/components/landing/sections/CultLineSection.tsx": "Centered cult manifesto section displaying the KARM card image above the main heading and sub-line targeting students, builders, and fighters.",
+  "frontend/src/components/landing/sections/CultLineSection.tsx": "Centered cult manifesto section displaying only the main heading and sub-line targeting students, builders, and fighters (image removed).",
   "frontend/src/components/landing/sections/SocialProofSection.tsx": "Minimal raw social proof section with three simple lines emphasizing real usage without metrics or hype.",
   "frontend/src/components/landing/landingConfig.ts": "Minimal configuration file that references the fixed Google Drive APK URL from download.ts.",
   "frontend/docs/landing-customization.md": "Developer documentation explaining the Mega APK download link, landing page structure, and how to customize copy and background effects.",

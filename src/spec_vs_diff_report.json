@@ -1,57 +1,40 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T10:16:48.830Z",
-  "summary": "REQ-1 and REQ-2 are partially implemented: a new AsciiKarmSection is inserted before SocialProofSection and CultLineSection now renders an image above the heading. However, the diff does not clearly show required resource cleanup in the Three.js ASCII component, does not show the static image asset being added, and does not prove the Cult Line heading text exactly matches the required copy because it is sourced from LANDING_COPY.",
+  "generatedAt": "2026-02-10T10:21:52.417Z",
+  "summary": "REQ-1 appears implemented by removing the CultLineSection image rendering and leaving only heading/subtext. REQ-2 is not evidenced in the diff: no removal of the referenced image path string and no deletion of the asset file is shown. Two auxiliary/metadata files were modified without being requested.",
   "missing_requirements": [
     {
-      "id": "REQ-1",
-      "requirement": "The ASCIIText component cleans up WebGL/DOM resources on unmount (no runaway requestAnimationFrame; event listeners removed).",
-      "reason": "The diff shows AsciiFilter adds a document-level 'mousemove' listener, but the provided/truncated code does not show any corresponding removal on unmount, nor does it show requestAnimationFrame cancellation/disposal logic.",
-      "evidence": [
-        "frontend/src/components/landing/three/AsciiText.tsx"
-      ]
-    },
-    {
       "id": "REQ-2",
-      "requirement": "The uploaded image is served as a static frontend asset (not via backend) and loads correctly in production build.",
-      "reason": "CultLineSection references a static path (/assets/generated/karm-whatsapp-card.dim_736x1472.jpg), but the diff summary does not show the image file being added to the frontend assets/public folder, so production availability cannot be confirmed from the diff.",
+      "requirement": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
+      "reason": "The diff summary shows no code change removing the string reference and no file removal under frontend/public/assets/generated/. Only CultLineSection.tsx and metadata/summary files were modified.",
       "evidence": [
-        "frontend/src/components/landing/sections/CultLineSection.tsx"
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "requirement": "Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\"",
-      "reason": "The heading text is rendered from LANDING_COPY.cultLine.main, but the diff does not include the landingCopy value (or show it updated) to confirm the exact required string is displayed.",
-      "evidence": [
-        "frontend/src/components/landing/sections/CultLineSection.tsx"
+        "frontend/src/components/landing/sections/CultLineSection.tsx",
+        "frontend-file-summaries.txt",
+        "project_state.json"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added/modified project tracking metadata (project_state.json) describing new feature requests and statuses.",
-      "reason": "The BuildRequest describes only frontend UI changes (ASCII section and image insertion) and does not request new project metadata/state files.",
-      "evidence": [
-        "project_state.json"
-      ]
-    },
-    {
-      "description": "Updated/added a repository documentation/summary file (frontend-file-summaries.txt) with broad claims about many landing page components and styles beyond the requested changes.",
-      "reason": "The BuildRequest does not ask for generating or updating file summary documentation; it only asks for implementing the ASCII section and inserting an image with exact heading copy requirements.",
+      "description": "Updated/added metadata entries describing many landing-page components and changes (frontend-file-summaries.txt).",
+      "reason": "BuildRequest only asks to remove an image from CultLineSection and remove a specific asset reference/file; it does not request regenerating or editing repository-wide summary documentation.",
       "evidence": [
         "frontend-file-summaries.txt"
       ]
+    },
+    {
+      "description": "Modified project_state.json by adding new_feature_requests entries (AR-1/AR-2/AR-3) and setting statuses.",
+      "reason": "BuildRequest does not request changes to project tracking/state files; this is extra beyond the specified frontend changes.",
+      "evidence": [
+        "project_state.json"
+      ]
     }
   ],
-  "confidence": 0.68,
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/landing/LandingPage.tsx",
-    "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
     "frontend/src/components/landing/sections/CultLineSection.tsx",
-    "frontend/src/components/landing/three/AsciiText.tsx",
     "project_state.json"
   ]
 }

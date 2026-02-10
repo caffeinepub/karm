@@ -1,78 +1,55 @@
 {
   "kind": "build_request",
-  "title": "Insert Cult Line image and add Three.js ASCIIText 'KARM' section above Social Proof",
+  "title": "Remove CultLineSection image from landing page",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
+      "text": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-3"
         ],
         "quotes": [
-          "add the image im giving you now and also im giving a code for ASCII text make that similar one but with the text KARM",
-          "you put this above the section where we have written used during real study sessions"
+          "remove that image for real"
         ]
       },
       "acceptanceCriteria": [
-        "Landing page order renders the ASCIIText section before the Social Proof section (before the lines that include \"Used during real study sessions\").",
-        "ASCIIText renders the word \"KARM\" (not the default text) and respects props: enableWaves={false} and asciiFontSize={7}.",
-        "The ASCIIText component cleans up WebGL/DOM resources on unmount (no runaway requestAnimationFrame; event listeners removed).",
-        "The section is responsive: it has a stable height on mobile/desktop and does not overflow horizontally."
+        "CultLineSection no longer renders an <img> element or any visual image placeholder above the cult line heading.",
+        "The CultLineSection layout remains centered and visually balanced after the image removal (no unintended extra vertical whitespace from the removed image wrapper).",
+        "No other landing sections (Hero, PsychologicalHit, WhatItDoes, AsciiKarm, SocialProof, FinalCTA) change behavior or content."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
+      "text": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-3"
         ],
         "quotes": [
-          "above that line, built for people who are done negotiating with themselves add the image im giving you now"
+          "remove that image for real"
         ]
       },
       "acceptanceCriteria": [
-        "The image is displayed above the CultLineSection heading text (\"Built for people who are done negotiating with themselves.\").",
-        "The image is served as a static frontend asset (not via backend) and loads correctly in production build.",
-        "The image is responsive (keeps aspect ratio, has sensible max width, and does not cause layout shift beyond normal image loading)."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "built for people who are done negotiating with themselves"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The displayed heading text matches exactly: \"Built for people who are done negotiating with themselves.\"",
-        "No new non-English user-facing strings are introduced as part of this change."
+        "The string path \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" is no longer referenced in frontend source code.",
+        "If the file is not referenced anywhere else, it is removed from the repository under frontend/public/assets/generated/ (or the appropriate public assets folder).",
+        "The app builds successfully with no missing-asset console errors in the browser."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
-    "Backend must remain single-actor in backend/main.mo; no new backend services.",
-    "Do not route or proxy images through the backend; images must be static frontend assets."
+    "Do not edit files under frontend/src/components/ui or any other paths listed in frontend.immutablePaths."
   ],
   "nonGoals": [
-    "Do not change APK download URL behavior or CTA logic.",
-    "Do not add new authentication flows or backend persistence.",
-    "Do not refactor existing hero FaultyTerminal implementation beyond what is necessary to place the new ASCIIText section."
+    "Do not change landing page copy text.",
+    "Do not add new images or replacement graphics.",
+    "Do not change backend behavior or add backend features."
   ],
   "imageRequirements": {
-    "required": [
-      "Cropped/cleaned version of the uploaded screenshot focusing on the central card (karm-whatsapp-card.dim_736x1472.jpg)"
-    ],
+    "required": [],
     "edits": []
   },
   "userProfileUpdate": {

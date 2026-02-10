@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Update the landing page by inserting a new Three.js ASCII “KARM” section above Social Proof and adding the provided Cult Line image above the Cult Line heading.
+**Goal:** Remove the CultLineSection landing-page image so the section shows only the heading and subtext, and clean up the now-unused image asset reference.
 
 **Planned changes:**
-- Add a new Three.js-based ASCIIText React component (ported from the provided snippet) and render it as a full-width, responsive landing section with text "KARM" using `enableWaves={false}` and `asciiFontSize={7}`, placed above the Social Proof section (above the “Used during real study sessions” line).
-- Ensure the ASCIIText component properly cleans up resources on unmount (animation loop and event listeners) and does not overflow horizontally on mobile/desktop.
-- Insert the user-provided image as a static frontend asset into the CultLineSection area, positioned above the heading and styled to match the dark landing aesthetic (centered, responsive, sensible max-width/spacing).
-- Ensure the Cult Line heading copy matches exactly: "Built for people who are done negotiating with themselves." and keep user-facing text in English.
+- Update CultLineSection to stop rendering the screenshot/card image (no `<img>` and no image placeholder/wrapper that leaves extra whitespace).
+- Remove the static asset reference to `/assets/generated/karm-whatsapp-card.dim_736x1472.jpg` from frontend code.
+- If the image file is unused across the app, delete `frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg` (or equivalent public assets path) and verify the app builds without missing-asset errors.
 
-**User-visible outcome:** The landing page shows a new animated ASCII “KARM” section above Social Proof, and the Cult Line section displays the provided image above the “Built for people who are done negotiating with themselves.” heading.
+**User-visible outcome:** The CultLineSection displays a centered, balanced heading and subtext only (no image), and the app loads/builds cleanly without referencing or requiring the removed asset.

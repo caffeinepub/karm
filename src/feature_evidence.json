@@ -2,12 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-new-three-js-based-ascii-text-react-component-ported-from-the-provided-codepen-based-snippet-and-render-it-with-the-text-karm-enablewaves-false-asciifontsize-7-in-a-new-full-width-section-placed-above-the-section-that-contains-the-line-used-during-real-study-sessions-i-e-above-socialproofsection-in-the-landing-page-flow",
-      "featureTitle": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
+      "featureId": "feature-remove-the-image-from-the-landing-page-cultlinesection-so-that-the-section-only-shows-the-heading-and-subtext-no-screenshot-card-image-rendered",
+      "featureTitle": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
       "files": [
-        "frontend/src/components/landing/LandingPage.tsx",
-        "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
-        "frontend/src/components/landing/three/AsciiText.tsx"
+        "frontend/src/components/landing/sections/CultLineSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -22,8 +20,8 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-insert-the-user-provided-uploaded-image-into-the-built-for-people-who-are-done-negotiating-with-themselves-cultlinesection-area-positioned-above-that-line-and-style-it-to-fit-the-existing-dark-landing-aesthetic-centered-responsive-with-appropriate-max-width-and-spacing",
-      "featureTitle": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
+      "featureId": "feature-remove-the-unused-static-asset-reference-to-assets-generated-karm-whatsapp-card-dim-736x1472-jpg-from-the-codebase-and-delete-the-file-from-the-frontend-public-assets-if-it-is-no-longer-used-anywhere-in-the-app",
+      "featureTitle": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
       "files": [
         "frontend/src/components/landing/sections/CultLineSection.tsx"
       ],
@@ -36,24 +34,6 @@
       ],
       "testIds": [
         "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-the-cult-line-heading-copy-uses-the-exact-sentence-case-and-punctuation-built-for-people-who-are-done-negotiating-with-themselves-and-keep-all-user-facing-text-in-english",
-      "featureTitle": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
-      "files": [
-        "frontend/src/components/landing/sections/CultLineSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
       ],
       "confidence": "high"
     }

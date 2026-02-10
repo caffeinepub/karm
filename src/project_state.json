@@ -1,35 +1,24 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Landing/page update: add a tagline line, insert a provided image, and add a Three.js-based ASCII text hero reading \"KARM\" positioned above the \"used during real study sessions\" section.",
-  "architectural_notes": [
-    "Use a Three.js + shader-based ASCIIText React component (ported/enhanced from the referenced CodePen) for the \"KARM\" text effect."
-  ],
+  "summary": "New project",
+  "architectural_notes": [],
   "known_issues": [],
-  "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Cropped/cleaned version of the uploaded screenshot focusing on the central card (karm-whatsapp-card.dim_736x1472.jpg)",
+  "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-add-a-new-three-js-based-ascii-text-react-component-ported-from-the-provided-codepen-based-snippet-and-render-it-with-the-text-karm-enablewaves-false-asciifontsize-7-in-a-new-full-width-section-placed-above-the-section-that-contains-the-line-used-during-real-study-sessions-i-e-above-socialproofsection-in-the-landing-page-flow",
-      "title": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
+      "id": "feature-remove-the-image-from-the-landing-page-cultlinesection-so-that-the-section-only-shows-the-heading-and-subtext-no-screenshot-card-image-rendered",
+      "title": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-insert-the-user-provided-uploaded-image-into-the-built-for-people-who-are-done-negotiating-with-themselves-cultlinesection-area-positioned-above-that-line-and-style-it-to-fit-the-existing-dark-landing-aesthetic-centered-responsive-with-appropriate-max-width-and-spacing",
-      "title": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
+      "id": "feature-remove-the-unused-static-asset-reference-to-assets-generated-karm-whatsapp-card-dim-736x1472-jpg-from-the-codebase-and-delete-the-file-from-the-frontend-public-assets-if-it-is-no-longer-used-anywhere-in-the-app",
+      "title": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
       "reqIds": [
         "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-the-cult-line-heading-copy-uses-the-exact-sentence-case-and-punctuation-built-for-people-who-are-done-negotiating-with-themselves-and-keep-all-user-facing-text-in-english",
-      "title": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
-      "reqIds": [
-        "REQ-3"
       ],
       "version": 1
     }
@@ -37,25 +26,12 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add hero ASCII text component (Three.js ASCIIText) displaying \"KARM\" and place it above the \"used during real study sessions\" section",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Insert the provided image above the line \"built for people who are done negotiating with themselves\" (in the section above \"used during real study sessions\")",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Add/position the tagline text \"built for people who are done negotiating with themselves\" above the referenced section",
+      "summary": "Remove the image from the app (user requested image removal)",
       "reqIds": [],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "KARM",
+  "projectName": "Remove CultLineSection image from landing page",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

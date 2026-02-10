@@ -1,83 +1,42 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Landing page: add KARM Three.js ASCIIText section + Cult Line image",
+  "title": "Remove CultLineSection image and unused landing asset",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Create a Three.js-based ASCIIText React component and add a full-width 'KARM' section above SocialProofSection on the landing page.",
+      "summary": "Remove the CultLineSection screenshot/card image so only heading and subtext render, keeping the section centered and balanced.",
       "acceptanceCriteria": [
-        "Landing page order renders the ASCIIText section before the Social Proof section (before the lines that include \"Used during real study sessions\").",
-        "ASCIIText renders the word \"KARM\" (not the default text) and respects props: enableWaves={false} and asciiFontSize={7}.",
-        "The ASCIIText component cleans up WebGL/DOM resources on unmount (no runaway requestAnimationFrame; event listeners removed).",
-        "The section is responsive: it has a stable height on mobile/desktop and does not overflow horizontally."
+        "CultLineSection no longer renders an <img> element or any visual image placeholder above the cult line heading.",
+        "The CultLineSection layout remains centered and visually balanced after the image removal (no unintended extra vertical whitespace from the removed image wrapper).",
+        "No other landing sections (Hero, PsychologicalHit, WhatItDoes, AsciiKarm, SocialProof, FinalCTA) change behavior or content."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/landing/three/AsciiText.tsx",
-          "operation": "create",
-          "description": "Create a reusable Three.js-based ASCII text renderer React component (ported from the provided snippet) that accepts props including text, enableWaves, and asciiFontSize; ensure proper cleanup of requestAnimationFrame, resize handlers/observers, and WebGL resources on unmount."
-        },
-        {
-          "path": "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
-          "operation": "create",
-          "description": "Create a new full-width landing section that renders the AsciiText component with text=\"KARM\", enableWaves={false}, asciiFontSize={7}, and enforces a stable responsive height with overflow-x hidden."
-        },
-        {
-          "path": "frontend/src/components/landing/LandingPage.tsx",
+          "path": "frontend/src/components/landing/sections/CultLineSection.tsx",
           "operation": "modify",
-          "description": "Wire the new AsciiKarmSection into the landing page flow so it appears above SocialProofSection (i.e., before the section that includes the line \"Used during real study sessions\")."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add minimal global utility styling (if needed) to support the ASCII section responsiveness (stable height and no horizontal overflow) without changing existing hero/FaultyTerminal behavior."
-        },
-        {
-          "path": "frontend/package.json",
-          "operation": "modify",
-          "description": "Ensure Three.js dependency is present for the new ASCIIText component (add/update dependency as needed) and keep build configuration compatible with the existing React template."
+          "description": "Remove the image wrapper and <img> element from CultLineSection; adjust the surrounding spacing classes so the section remains visually balanced with only the heading and subtext."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Add the provided Cult Line image as a static frontend asset and display it above the CultLineSection heading with dark-theme responsive styling.",
+      "summary": "Remove the unused generated WhatsApp card asset reference from the codebase and delete the asset file if it is no longer used.",
       "acceptanceCriteria": [
-        "The image is displayed above the CultLineSection heading text (\"Built for people who are done negotiating with themselves.\").",
-        "The image is served as a static frontend asset (not via backend) and loads correctly in production build.",
-        "The image is responsive (keeps aspect ratio, has sensible max width, and does not cause layout shift beyond normal image loading)."
+        "The string path \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" is no longer referenced in frontend source code.",
+        "If the file is not referenced anywhere else, it is removed from the repository under frontend/public/assets/generated/ (or the appropriate public assets folder).",
+        "The app builds successfully with no missing-asset console errors in the browser."
       ],
       "file_operations": [
+        {
+          "path": "frontend/src/components/landing/sections/CultLineSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the hardcoded asset string \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" is fully removed from this component (and no longer referenced after the image removal)."
+        },
         {
           "path": "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
-          "operation": "create",
-          "description": "Add the generated cropped/cleaned Cult Line screenshot image as a static public asset at frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg (no backend routing)."
-        },
-        {
-          "path": "frontend/src/components/landing/sections/CultLineSection.tsx",
-          "operation": "modify",
-          "description": "Render the static image above the CultLineSection heading, centered and responsive (preserve aspect ratio, apply sensible max-width, spacing, and dark aesthetic)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Ensure the Cult Line heading copy matches the exact English sentence case and punctuation.",
-      "acceptanceCriteria": [
-        "The displayed heading text matches exactly: \"Built for people who are done negotiating with themselves.\"",
-        "No new non-English user-facing strings are introduced as part of this change."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/landing/landingCopy.ts",
-          "operation": "modify",
-          "description": "Verify and enforce that LANDING_COPY.cultLine.main is exactly \"Built for people who are done negotiating with themselves.\" and keep all newly introduced user-facing text in English."
-        },
-        {
-          "path": "frontend/src/components/landing/sections/CultLineSection.tsx",
-          "operation": "modify",
-          "description": "Ensure the CultLineSection continues to display the exact required heading copy (and does not override it with different casing/punctuation)."
+          "operation": "delete",
+          "description": "Delete the unused static asset file frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg if it is not referenced anywhere else in the app."
         }
       ]
     }

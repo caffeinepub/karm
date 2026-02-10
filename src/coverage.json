@@ -1,55 +1,37 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T10:16:48.833Z",
+  "generatedAt": "2026-02-10T10:21:52.419Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add a new Three.js-based ASCII text React component (ported from the provided codepen-based snippet) and render it with the text \"KARM\" (enableWaves=false, asciiFontSize=7) in a new full-width section placed above the section that contains the line \"Used during real study sessions\" (i.e., above SocialProofSection in the landing page flow).",
+        "summary": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/landing/three/AsciiText.tsx",
-          "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
-          "frontend/src/components/landing/LandingPage.tsx",
-          "frontend/src/index.css",
-          "frontend/package.json"
+          "frontend/src/components/landing/sections/CultLineSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/landing/three/AsciiText.tsx",
-          "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
-          "frontend/src/components/landing/LandingPage.tsx"
+          "frontend/src/components/landing/sections/CultLineSection.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Insert the user-provided uploaded image into the \"Built for people who are done negotiating with themselves.\" (CultLineSection) area, positioned above that line, and style it to fit the existing dark landing aesthetic (centered, responsive, with appropriate max-width and spacing).",
+        "summary": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
-          "frontend/src/components/landing/sections/CultLineSection.tsx"
+          "frontend/src/components/landing/sections/CultLineSection.tsx",
+          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
-          "frontend/src/components/landing/sections/CultLineSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Ensure the Cult Line heading copy uses the exact sentence case and punctuation: \"Built for people who are done negotiating with themselves.\" and keep all user-facing text in English.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/landing/landingCopy.ts",
-          "frontend/src/components/landing/sections/CultLineSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/landing/sections/CultLineSection.tsx"
+          "frontend/src/components/landing/sections/CultLineSection.tsx",
+          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg"
         ]
       }
     ]
@@ -60,10 +42,7 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
-    "frontend/src/components/landing/LandingPage.tsx",
-    "frontend/src/components/landing/sections/AsciiKarmSection.tsx",
     "frontend/src/components/landing/sections/CultLineSection.tsx",
-    "frontend/src/components/landing/three/AsciiText.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
