@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Remove the CultLineSection landing-page image so the section shows only the heading and subtext, and clean up the now-unused image asset reference.
+**Goal:** Eliminate the white/blank screen/flash in the landing page hero where the “KARM” wordmark overlays the FaultyTerminal background, and ensure a dark, consistent hero appearance across supported browsers/devices.
 
 **Planned changes:**
-- Update CultLineSection to stop rendering the screenshot/card image (no `<img>` and no image placeholder/wrapper that leaves extra whitespace).
-- Remove the static asset reference to `/assets/generated/karm-whatsapp-card.dim_736x1472.jpg` from frontend code.
-- If the image file is unused across the app, delete `frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg` (or equivalent public assets path) and verify the app builds without missing-asset errors.
+- Investigate and fix the root cause of the white/blank rendering in the hero area around the “KARM” wordmark when the FaultyTerminal background initializes/renders.
+- Add a graceful FaultyTerminal fallback state when WebGL context creation, shader compilation, or program linking fails, rendering a dark non-white background while keeping hero content readable.
+- Ensure FaultyTerminal cleans up animation frames/event listeners safely on unmount regardless of whether WebGL initialized successfully, and avoid introducing new console errors during normal hero rendering.
 
-**User-visible outcome:** The CultLineSection displays a centered, balanced heading and subtext only (no image), and the app loads/builds cleanly without referencing or requiring the removed asset.
+**User-visible outcome:** The hero section reliably renders with a dark terminal-style background (when WebGL works), and otherwise falls back to a dark background without any white/blank screen, keeping the “KARM” wordmark and hero content readable.

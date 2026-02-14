@@ -1,40 +1,26 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T10:21:52.417Z",
-  "summary": "REQ-1 appears implemented by removing the CultLineSection image rendering and leaving only heading/subtext. REQ-2 is not evidenced in the diff: no removal of the referenced image path string and no deletion of the asset file is shown. Two auxiliary/metadata files were modified without being requested.",
+  "generatedAt": "2026-02-14T18:58:40.151Z",
+  "summary": "REQ-1 appears addressed by forcing a dark background behind/within the FaultyTerminal hero area (HeroSection adds an explicit black layer; FaultyTerminal container/canvas get black backgrounds). REQ-2 (graceful WebGL failure fallback + cleanup behavior) is only partially evidenced via CSS; the diff summary does not show runtime detection, fallback activation, or guaranteed cleanup logic in the component code.",
   "missing_requirements": [
     {
       "id": "REQ-2",
-      "requirement": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
-      "reason": "The diff summary shows no code change removing the string reference and no file removal under frontend/public/assets/generated/. Only CultLineSection.tsx and metadata/summary files were modified.",
+      "requirement": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen; and ensure clean unmount cleanup regardless of init success.",
+      "reason": "The diff shows only fallback styling (.webgl-fallback) but provides no evidence that FaultyTerminal.tsx detects WebGL/shader/program failures, applies the fallback class/UI, or guarantees cleanup of event listeners/animation frames when initialization fails. The TSX file is truncated and does not include any shown fallback/error handling logic.",
       "evidence": [
-        "frontend/src/components/landing/sections/CultLineSection.tsx",
-        "frontend-file-summaries.txt",
-        "project_state.json"
+        "frontend/src/components/landing/hero/FaultyTerminal.css",
+        "frontend/src/components/landing/hero/FaultyTerminal.tsx (truncated)"
       ]
     }
   ],
-  "hallucinated_features": [
-    {
-      "description": "Updated/added metadata entries describing many landing-page components and changes (frontend-file-summaries.txt).",
-      "reason": "BuildRequest only asks to remove an image from CultLineSection and remove a specific asset reference/file; it does not request regenerating or editing repository-wide summary documentation.",
-      "evidence": [
-        "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "Modified project_state.json by adding new_feature_requests entries (AR-1/AR-2/AR-3) and setting statuses.",
-      "reason": "BuildRequest does not request changes to project tracking/state files; this is extra beyond the specified frontend changes.",
-      "evidence": [
-        "project_state.json"
-      ]
-    }
-  ],
-  "confidence": 0.72,
+  "hallucinated_features": [],
+  "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/landing/sections/CultLineSection.tsx",
+    "frontend/src/components/landing/hero/FaultyTerminal.css",
+    "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+    "frontend/src/components/landing/sections/HeroSection.tsx",
     "project_state.json"
   ]
 }

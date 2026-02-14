@@ -6,10 +6,12 @@ import CultLineSection from './sections/CultLineSection';
 import SocialProofSection from './sections/SocialProofSection';
 import FinalCTASection from './sections/FinalCTASection';
 import CursorGlow from './effects/CursorGlow';
+import InstallsCounterBar from './InstallsCounterBar';
 
 export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-black text-white overflow-x-hidden">
+      <InstallsCounterBar />
       <CursorGlow />
       <HeroSection />
       <PsychologicalHitSection />

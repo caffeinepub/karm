@@ -4,8 +4,19 @@ import ResponsiveContainer from '../ResponsiveContainer';
 import FaultyTerminal from '../hero/FaultyTerminal';
 import { downloadAPK } from '../download';
 import { LANDING_CONFIG } from '../landingConfig';
+import { LANDING_COPY } from '../landingCopy';
+import { useInstallCount } from '@/hooks/useInstallCount';
 
 export default function HeroSection() {
+  const { increment } = useInstallCount();
+
+  const handleDownloadClick = () => {
+    // Open the APK link first (synchronous, reliable)
+    downloadAPK();
+    // Then increment the counter (async, non-blocking)
+    increment();
+  };
+
   const handleSecondaryCTA = () => {
     const { secondaryCTA } = LANDING_CONFIG.hero;
     if (secondaryCTA.action === 'scroll' && secondaryCTA.scrollTarget) {
@@ -17,7 +28,10 @@ export default function HeroSection() {
   };
 
   return (
-    <Section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <Section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Dark background layer to prevent white flash */}
+      <div className="absolute inset-0 w-full h-full bg-black" />
+      
       {/* FaultyTerminal Background */}
       <div className="absolute inset-0 w-full h-full">
         <FaultyTerminal
@@ -56,19 +70,19 @@ export default function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <button
-              onClick={downloadAPK}
-              className="group px-8 py-4 bg-white text-black rounded-full font-medium text-lg hover:bg-white/90 transition-all duration-300 flex items-center gap-2 premium-cta"
+              onClick={handleDownloadClick}
+              className="premium-cta px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 justify-center"
             >
-              <Download className="h-5 w-5" />
+              <Download className="w-5 h-5" />
               Download KARM
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={handleSecondaryCTA}
-              className="px-8 py-4 border border-white/20 text-white rounded-full font-medium text-lg hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
+              className="glass-panel px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 justify-center text-white/90 hover:text-white hover:bg-white/5 transition-all"
             >
-              Learn More
+              {LANDING_COPY.hero.secondaryCTA}
+              <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </div>

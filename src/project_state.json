@@ -3,35 +3,30 @@
   "projectStateVersion": 3,
   "summary": "New project",
   "architectural_notes": [],
-  "known_issues": [],
+  "known_issues": [
+    "White screen appears in the main section where \"karm\" is displayed (faulty terminal area)."
+  ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-remove-the-image-from-the-landing-page-cultlinesection-so-that-the-section-only-shows-the-heading-and-subtext-no-screenshot-card-image-rendered",
-      "title": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
+      "id": "feature-investigate-and-fix-the-white-blank-screen-appearing-in-the-main-hero-section-where-the-karm-wordmark-is-displayed-over-the-faultyterminal-background-so-the-hero-consistently-renders-with-a-dark-background-and-the-intended-terminal-effect-across-supported-browsers-devices",
+      "title": "Investigate and fix the white/blank screen appearing in the main hero section where the \"KARM\" wordmark is displayed over the FaultyTerminal background, so the hero consistently renders with a dark background and the intended terminal effect across supported browsers/devices.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-remove-the-unused-static-asset-reference-to-assets-generated-karm-whatsapp-card-dim-736x1472-jpg-from-the-codebase-and-delete-the-file-from-the-frontend-public-assets-if-it-is-no-longer-used-anywhere-in-the-app",
-      "title": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
+      "id": "feature-add-a-graceful-fallback-for-the-faultyterminal-component-when-webgl-context-creation-shader-compilation-or-program-linking-fails-ensuring-the-hero-section-still-displays-a-dark-visually-coherent-background-instead-of-a-white-blank-screen",
+      "title": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     }
   ],
-  "new_feature_requests": [
-    {
-      "id": "AR-1",
-      "summary": "Remove the image from the app (user requested image removal)",
-      "reqIds": [],
-      "status": "pending"
-    }
-  ],
-  "projectName": "Remove CultLineSection image from landing page",
+  "new_feature_requests": [],
+  "projectName": "Fix white/blank screen in hero section around KARM + FaultyTerminal background",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

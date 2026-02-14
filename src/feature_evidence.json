@@ -2,10 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-image-from-the-landing-page-cultlinesection-so-that-the-section-only-shows-the-heading-and-subtext-no-screenshot-card-image-rendered",
-      "featureTitle": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
+      "featureId": "feature-investigate-and-fix-the-white-blank-screen-appearing-in-the-main-hero-section-where-the-karm-wordmark-is-displayed-over-the-faultyterminal-background-so-the-hero-consistently-renders-with-a-dark-background-and-the-intended-terminal-effect-across-supported-browsers-devices",
+      "featureTitle": "Investigate and fix the white/blank screen appearing in the main hero section where the \"KARM\" wordmark is displayed over the FaultyTerminal background, so the hero consistently renders with a dark background and the intended terminal effect across supported browsers/devices.",
       "files": [
-        "frontend/src/components/landing/sections/CultLineSection.tsx"
+        "frontend/src/components/landing/hero/FaultyTerminal.css",
+        "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+        "frontend/src/components/landing/sections/HeroSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -20,10 +22,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-the-unused-static-asset-reference-to-assets-generated-karm-whatsapp-card-dim-736x1472-jpg-from-the-codebase-and-delete-the-file-from-the-frontend-public-assets-if-it-is-no-longer-used-anywhere-in-the-app",
-      "featureTitle": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
+      "featureId": "feature-add-a-graceful-fallback-for-the-faultyterminal-component-when-webgl-context-creation-shader-compilation-or-program-linking-fails-ensuring-the-hero-section-still-displays-a-dark-visually-coherent-background-instead-of-a-white-blank-screen",
+      "featureTitle": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen.",
       "files": [
-        "frontend/src/components/landing/sections/CultLineSection.tsx"
+        "frontend/src/components/landing/hero/FaultyTerminal.css",
+        "frontend/src/components/landing/hero/FaultyTerminal.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",

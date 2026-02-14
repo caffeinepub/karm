@@ -1,65 +1,54 @@
 {
   "kind": "build_request",
-  "title": "Remove CultLineSection image from landing page",
+  "title": "Fix white/blank screen in hero section around KARM + FaultyTerminal background",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
+      "text": "Investigate and fix the white/blank screen appearing in the main hero section where the \"KARM\" wordmark is displayed over the FaultyTerminal background, so the hero consistently renders with a dark background and the intended terminal effect across supported browsers/devices.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "remove that image for real"
+          "bro why there is white screen at main section where karm is written with faulty terminal"
         ]
       },
       "acceptanceCriteria": [
-        "CultLineSection no longer renders an <img> element or any visual image placeholder above the cult line heading.",
-        "The CultLineSection layout remains centered and visually balanced after the image removal (no unintended extra vertical whitespace from the removed image wrapper).",
-        "No other landing sections (Hero, PsychologicalHit, WhatItDoes, AsciiKarm, SocialProof, FinalCTA) change behavior or content."
+        "On page load, the hero section does not show a solid white block/flash in the area behind/around the \"KARM\" wordmark.",
+        "The FaultyTerminal background renders correctly (animated terminal effect) on browsers/devices with WebGL support.",
+        "No new console errors are emitted during normal hero rendering (excluding existing unrelated warnings)."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
+      "text": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "remove that image for real"
+          "white screen at main section where karm is written with faulty terminal"
         ]
       },
       "acceptanceCriteria": [
-        "The string path \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" is no longer referenced in frontend source code.",
-        "If the file is not referenced anywhere else, it is removed from the repository under frontend/public/assets/generated/ (or the appropriate public assets folder).",
-        "The app builds successfully with no missing-asset console errors in the browser."
+        "If WebGL is unavailable or shader/program setup fails, the hero section shows a non-white fallback background (e.g., solid black or subtle dark gradient) and the rest of the hero content remains readable.",
+        "The FaultyTerminal component cleans up event listeners/animation frames without throwing errors when unmounted, regardless of whether it initialized WebGL successfully."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui or any other paths listed in frontend.immutablePaths."
+    "Do not edit frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui (compose instead).",
+    "Keep all changes within the existing React + TypeScript + Tailwind setup; no new backend services or external dependencies that violate platform constraints."
   ],
   "nonGoals": [
-    "Do not change landing page copy text.",
-    "Do not add new images or replacement graphics.",
-    "Do not change backend behavior or add backend features."
+    "No changes to backend install counter logic or persistence.",
+    "No redesign of landing page content/sections beyond what is needed to eliminate the white/blank screen and provide a fallback for the FaultyTerminal effect."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

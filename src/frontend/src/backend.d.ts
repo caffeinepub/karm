@@ -8,4 +8,6 @@ export interface None {
 }
 export type Option<T> = Some<T> | None;
 export interface backendInterface {
+    getInstallCount(): Promise<bigint>;
+    incrementInstallCount(): Promise<bigint>;
 }

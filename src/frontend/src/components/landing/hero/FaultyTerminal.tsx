@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useMemo, useCallback, useState } from 'react';
 import './FaultyTerminal.css';
 
 const vertexShader = `
@@ -226,7 +226,6 @@ function createShader(gl: WebGLRenderingContext, type: number, source: string): 
   gl.compileShader(shader);
   
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    console.error('Shader compile error:', gl.getShaderInfoLog(shader));
     gl.deleteShader(shader);
     return null;
   }
@@ -243,7 +242,6 @@ function createProgram(gl: WebGLRenderingContext, vertexShader: WebGLShader, fra
   gl.linkProgram(program);
   
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error('Program link error:', gl.getProgramInfoLog(program));
     gl.deleteProgram(program);
     return null;
   }
@@ -304,6 +302,7 @@ export default function FaultyTerminal({
   const rafRef = useRef(0);
   const loadAnimationStartRef = useRef(0);
   const timeOffsetRef = useRef(Math.random() * 100);
+  const [webglFailed, setWebglFailed] = useState(false);
 
   const tintVec = useMemo(() => hexToRgb(tint), [tint]);
   const ditherValue = useMemo(() => (typeof dither === 'boolean' ? (dither ? 1 : 0) : dither), [dither]);
@@ -322,27 +321,41 @@ export default function FaultyTerminal({
     const canvas = canvasRef.current;
     if (!ctn || !canvas) return;
 
+    // Create WebGL context with opaque background (no alpha)
     const gl = canvas.getContext('webgl', { 
-      alpha: true, 
+      alpha: false,
       antialias: true,
-      powerPreference: 'high-performance'
+      powerPreference: 'high-performance',
+      premultipliedAlpha: false
     });
     
     if (!gl) {
-      console.error('WebGL not supported');
+      setWebglFailed(true);
       return;
     }
 
+    // Set clear color to black immediately
     gl.clearColor(0, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
     // Create shaders
     const vShader = createShader(gl, gl.VERTEX_SHADER, vertexShader);
     const fShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
     
-    if (!vShader || !fShader) return;
+    if (!vShader || !fShader) {
+      setWebglFailed(true);
+      if (vShader) gl.deleteShader(vShader);
+      if (fShader) gl.deleteShader(fShader);
+      return;
+    }
 
     const program = createProgram(gl, vShader, fShader);
-    if (!program) return;
+    if (!program) {
+      setWebglFailed(true);
+      gl.deleteShader(vShader);
+      gl.deleteShader(fShader);
+      return;
+    }
 
     gl.useProgram(program);
 
@@ -425,6 +438,8 @@ export default function FaultyTerminal({
       canvas.style.height = `${height}px`;
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform3f(uniforms.iResolution, canvas.width, canvas.height, canvas.width / canvas.height);
+      // Clear to black on resize
+      gl.clear(gl.COLOR_BUFFER_BIT);
     }
 
     const resizeObserver = new ResizeObserver(() => resize());
@@ -474,16 +489,18 @@ export default function FaultyTerminal({
     if (mouseReact) ctn.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
       resizeObserver.disconnect();
-      if (mouseReact) ctn.removeEventListener('mousemove', handleMouseMove);
+      if (mouseReact && ctn) ctn.removeEventListener('mousemove', handleMouseMove);
       
-      // Cleanup WebGL resources
-      gl.deleteBuffer(positionBuffer);
-      gl.deleteBuffer(uvBuffer);
-      gl.deleteShader(vShader);
-      gl.deleteShader(fShader);
-      gl.deleteProgram(program);
+      // Cleanup WebGL resources safely
+      if (positionBuffer) gl.deleteBuffer(positionBuffer);
+      if (uvBuffer) gl.deleteBuffer(uvBuffer);
+      if (vShader) gl.deleteShader(vShader);
+      if (fShader) gl.deleteShader(fShader);
+      if (program) gl.deleteProgram(program);
       
       const ext = gl.getExtension('WEBGL_lose_context');
       if (ext) ext.loseContext();
@@ -514,7 +531,11 @@ export default function FaultyTerminal({
   ]);
 
   return (
-    <div ref={containerRef} className={`faulty-terminal-container ${className}`} style={style}>
+    <div 
+      ref={containerRef} 
+      className={`faulty-terminal-container ${webglFailed ? 'webgl-fallback' : ''} ${className}`} 
+      style={style}
+    >
       <canvas ref={canvasRef} />
     </div>
   );

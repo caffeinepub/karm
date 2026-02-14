@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T10:21:52.419Z",
+  "generatedAt": "2026-02-14T18:58:40.154Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -12,26 +12,30 @@
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Remove the image from the landing page CultLineSection so that the section only shows the heading and subtext (no screenshot/card image rendered).",
+        "summary": "Investigate and fix the white/blank screen appearing in the main hero section where the \"KARM\" wordmark is displayed over the FaultyTerminal background, so the hero consistently renders with a dark background and the intended terminal effect across supported browsers/devices.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/landing/sections/CultLineSection.tsx"
+          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+          "frontend/src/components/landing/hero/FaultyTerminal.css",
+          "frontend/src/components/landing/sections/HeroSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/landing/sections/CultLineSection.tsx"
+          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+          "frontend/src/components/landing/hero/FaultyTerminal.css",
+          "frontend/src/components/landing/sections/HeroSection.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Remove the unused static asset reference to \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" from the codebase, and delete the file from the frontend public assets if it is no longer used anywhere in the app.",
+        "summary": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/landing/sections/CultLineSection.tsx",
-          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg"
+          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+          "frontend/src/components/landing/hero/FaultyTerminal.css"
         ],
         "matchedFiles": [
-          "frontend/src/components/landing/sections/CultLineSection.tsx",
-          "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg"
+          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+          "frontend/src/components/landing/hero/FaultyTerminal.css"
         ]
       }
     ]
@@ -41,8 +45,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
-    "frontend/src/components/landing/sections/CultLineSection.tsx",
+    "frontend/src/components/landing/hero/FaultyTerminal.css",
+    "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+    "frontend/src/components/landing/sections/HeroSection.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

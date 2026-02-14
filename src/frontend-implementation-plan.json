@@ -1,42 +1,51 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Remove CultLineSection image and unused landing asset",
+  "title": "Stabilize FaultyTerminal hero rendering and add WebGL-failure fallback",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Remove the CultLineSection screenshot/card image so only heading and subtext render, keeping the section centered and balanced.",
+      "summary": "Eliminate the white/blank flash/block in the hero where the KARM wordmark overlays the FaultyTerminal background, ensuring consistent dark rendering and no new console errors during normal operation.",
       "acceptanceCriteria": [
-        "CultLineSection no longer renders an <img> element or any visual image placeholder above the cult line heading.",
-        "The CultLineSection layout remains centered and visually balanced after the image removal (no unintended extra vertical whitespace from the removed image wrapper).",
-        "No other landing sections (Hero, PsychologicalHit, WhatItDoes, AsciiKarm, SocialProof, FinalCTA) change behavior or content."
+        "On page load, the hero section does not show a solid white block/flash in the area behind/around the \"KARM\" wordmark.",
+        "The FaultyTerminal background renders correctly (animated terminal effect) on browsers/devices with WebGL support.",
+        "No new console errors are emitted during normal hero rendering (excluding existing unrelated warnings)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/landing/sections/CultLineSection.tsx",
+          "path": "frontend/src/components/landing/hero/FaultyTerminal.tsx",
           "operation": "modify",
-          "description": "Remove the image wrapper and <img> element from CultLineSection; adjust the surrounding spacing classes so the section remains visually balanced with only the heading and subtext."
+          "description": "Harden WebGL initialization to prevent transient white/transparent canvas states: prefer an opaque WebGL context (avoid alpha transparency where possible), ensure the canvas is painted dark immediately on init (and not left uninitialized), and gate logging so normal successful initialization does not emit new console errors."
+        },
+        {
+          "path": "frontend/src/components/landing/hero/FaultyTerminal.css",
+          "operation": "modify",
+          "description": "Ensure the FaultyTerminal container and canvas have a consistent dark background (e.g., black) to prevent white showing through during first paint, resize, or brief initialization delays."
+        },
+        {
+          "path": "frontend/src/components/landing/sections/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Add an explicit dark background layer for the hero section behind the FaultyTerminal mount area so the hero remains dark even before the WebGL canvas draws its first frame, without changing overall content/CTA layout."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Remove the unused generated WhatsApp card asset reference from the codebase and delete the asset file if it is no longer used.",
+      "summary": "Add a graceful non-white fallback when FaultyTerminal cannot initialize WebGL or compile/link shaders, and ensure cleanup is safe regardless of init success.",
       "acceptanceCriteria": [
-        "The string path \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" is no longer referenced in frontend source code.",
-        "If the file is not referenced anywhere else, it is removed from the repository under frontend/public/assets/generated/ (or the appropriate public assets folder).",
-        "The app builds successfully with no missing-asset console errors in the browser."
+        "If WebGL is unavailable or shader/program setup fails, the hero section shows a non-white fallback background (e.g., solid black or subtle dark gradient) and the rest of the hero content remains readable.",
+        "The FaultyTerminal component cleans up event listeners/animation frames without throwing errors when unmounted, regardless of whether it initialized WebGL successfully."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/landing/sections/CultLineSection.tsx",
+          "path": "frontend/src/components/landing/hero/FaultyTerminal.tsx",
           "operation": "modify",
-          "description": "Ensure the hardcoded asset string \"/assets/generated/karm-whatsapp-card.dim_736x1472.jpg\" is fully removed from this component (and no longer referenced after the image removal)."
+          "description": "Implement an internal fallback mode when WebGL context creation or shader/program setup fails: render a dark fallback background instead of a blank/white area, avoid throwing, and ensure unmount cleanup is robust even when initialization exits early (cancel RAF safely, disconnect observers, and only delete WebGL resources if they were created)."
         },
         {
-          "path": "frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg",
-          "operation": "delete",
-          "description": "Delete the unused static asset file frontend/public/assets/generated/karm-whatsapp-card.dim_736x1472.jpg if it is not referenced anywhere else in the app."
+          "path": "frontend/src/components/landing/hero/FaultyTerminal.css",
+          "operation": "modify",
+          "description": "Add styling for the fallback state (dark solid/gradient background) that matches the hero aesthetic and guarantees readability of overlaid hero text."
         }
       ]
     }
