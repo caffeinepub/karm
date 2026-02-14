@@ -1,7 +1,9 @@
 import { ArrowRight, Download } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import Section from '../Section';
 import ResponsiveContainer from '../ResponsiveContainer';
-import FaultyTerminal from '../hero/FaultyTerminal';
+import SnowDotsBackground from '../hero/SnowDotsBackground';
+import RingTimer from '../hero/RingTimer';
 import { downloadAPK } from '../download';
 import { LANDING_CONFIG } from '../landingConfig';
 import { LANDING_COPY } from '../landingCopy';
@@ -9,6 +11,16 @@ import { useInstallCount } from '@/hooks/useInstallCount';
 
 export default function HeroSection() {
   const { increment } = useInstallCount();
+  const [startOrbitAnimation, setStartOrbitAnimation] = useState(false);
+
+  // Delay orbit animation start by 2 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStartOrbitAnimation(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleDownloadClick = () => {
     // Open the APK link first (synchronous, reliable)
@@ -29,31 +41,11 @@ export default function HeroSection() {
 
   return (
     <Section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Dark background layer to prevent white flash */}
+      {/* Solid black background - no terminal/glitch effects */}
       <div className="absolute inset-0 w-full h-full bg-black" />
       
-      {/* FaultyTerminal Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <FaultyTerminal
-          scale={1.5}
-          gridMul={[2, 1]}
-          digitSize={1.2}
-          timeScale={0.5}
-          pause={false}
-          scanlineIntensity={0.5}
-          glitchAmount={1}
-          flickerAmount={1}
-          noiseAmp={1}
-          chromaticAberration={0}
-          dither={0}
-          curvature={0.1}
-          tint="#f0a3e6"
-          mouseReact
-          mouseStrength={0.5}
-          pageLoadAnimation
-          brightness={0.6}
-        />
-      </div>
+      {/* Snow dots overlay - subtle falling animation */}
+      <SnowDotsBackground />
 
       <ResponsiveContainer className="relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 py-20">
@@ -61,6 +53,16 @@ export default function HeroSection() {
           <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter wordmark-glow">
             KARM
           </h1>
+
+          {/* Ring Timer - positioned above tagline */}
+          <div className="py-4">
+            <RingTimer 
+              size={280}
+              progress01={0.25}
+              animate={startOrbitAnimation}
+              className="mx-auto"
+            />
+          </div>
 
           {/* Tagline */}
           <p className="text-xl md:text-2xl text-white/60 max-w-2xl font-light tracking-wide">

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 
 const vertexShader = `
@@ -75,11 +75,13 @@ class AsciiFilter {
     this.domElement.style.left = '0';
     this.domElement.style.width = '100%';
     this.domElement.style.height = '100%';
+    this.domElement.style.backgroundColor = '#000000';
 
     this.pre = document.createElement('pre');
     this.domElement.appendChild(this.pre);
 
     this.canvas = document.createElement('canvas');
+    this.canvas.className = 'ascii-processing-canvas';
     this.context = this.canvas.getContext('2d')!;
     this.domElement.appendChild(this.canvas);
 
@@ -97,6 +99,8 @@ class AsciiFilter {
   }
 
   setSize(width: number, height: number) {
+    if (width <= 0 || height <= 0) return;
+    
     this.width = width;
     this.height = height;
     this.renderer.setSize(width, height);
@@ -110,8 +114,8 @@ class AsciiFilter {
     this.context.font = `${this.fontSize}px ${this.fontFamily}`;
     const charWidth = this.context.measureText('A').width;
 
-    this.cols = Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize)));
-    this.rows = Math.floor(this.height / this.fontSize);
+    this.cols = Math.max(1, Math.floor(this.width / (this.fontSize * (charWidth / this.fontSize))));
+    this.rows = Math.max(1, Math.floor(this.height / this.fontSize));
 
     this.canvas.width = this.cols;
     this.canvas.height = this.rows;
@@ -121,11 +125,14 @@ class AsciiFilter {
     this.pre.style.padding = '0';
     this.pre.style.lineHeight = '1em';
     this.pre.style.position = 'absolute';
-    this.pre.style.left = '0';
-    this.pre.style.top = '0';
+    this.pre.style.left = '50%';
+    this.pre.style.top = '50%';
+    this.pre.style.transform = 'translate(-50%, -50%)';
     this.pre.style.zIndex = '9';
     this.pre.style.backgroundAttachment = 'fixed';
     this.pre.style.mixBlendMode = 'difference';
+    this.pre.style.textAlign = 'center';
+    this.pre.style.whiteSpace = 'pre';
   }
 
   render(scene: THREE.Scene, camera: THREE.Camera) {
@@ -217,8 +224,8 @@ class CanvasTxt {
     const textWidth = Math.ceil(metrics.width) + 20;
     const textHeight = Math.ceil(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent) + 20;
 
-    this.canvas.width = textWidth;
-    this.canvas.height = textHeight;
+    this.canvas.width = Math.max(textWidth, 100);
+    this.canvas.height = Math.max(textHeight, 100);
   }
 
   render() {
@@ -344,6 +351,7 @@ class CanvAscii {
     this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     this.renderer.setPixelRatio(1);
     this.renderer.setClearColor(0x000000, 0);
+    this.renderer.domElement.className = 'ascii-webgl-canvas';
 
     this.filter = new AsciiFilter(this.renderer, {
       fontFamily: 'IBM Plex Mono',
@@ -359,6 +367,8 @@ class CanvAscii {
   }
 
   setSize(w: number, h: number) {
+    if (w <= 0 || h <= 0) return;
+    
     this.width = w;
     this.height = h;
 
@@ -467,6 +477,7 @@ export default function AsciiText({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const asciiRef = useRef<CanvAscii | null>(null);
+  const [webglFailed, setWebglFailed] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -476,14 +487,27 @@ export default function AsciiText({
     let ro: ResizeObserver | null = null;
 
     const createAndInit = async (container: HTMLElement, w: number, h: number) => {
-      const instance = new CanvAscii(
-        { text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves },
-        container,
-        w,
-        h
-      );
-      await instance.init();
-      return instance;
+      try {
+        // Test WebGL support
+        const testCanvas = document.createElement('canvas');
+        const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+        if (!gl) {
+          throw new Error('WebGL not supported');
+        }
+
+        const instance = new CanvAscii(
+          { text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves },
+          container,
+          w,
+          h
+        );
+        await instance.init();
+        return instance;
+      } catch (error) {
+        console.warn('ASCII renderer initialization failed:', error);
+        setWebglFailed(true);
+        return null;
+      }
     };
 
     const setup = async () => {
@@ -547,25 +571,29 @@ export default function AsciiText({
       style={{
         position: 'absolute',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#000000'
       }}
     >
+      {webglFailed && (
+        <div className="ascii-fallback">
+          <div className="ascii-fallback-text">{text}</div>
+        </div>
+      )}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap');
 
-        .ascii-text-container canvas {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          image-rendering: optimizeSpeed;
-          image-rendering: -moz-crisp-edges;
-          image-rendering: -o-crisp-edges;
-          image-rendering: -webkit-optimize-contrast;
-          image-rendering: optimize-contrast;
-          image-rendering: crisp-edges;
-          image-rendering: pixelated;
+        .ascii-text-container {
+          background-color: #000000 !important;
+        }
+
+        .ascii-webgl-canvas,
+        .ascii-processing-canvas {
+          display: none !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+          position: absolute !important;
+          opacity: 0 !important;
         }
 
         .ascii-text-container pre {
@@ -573,16 +601,44 @@ export default function AsciiText({
           user-select: none;
           padding: 0;
           line-height: 1em;
-          text-align: left;
+          text-align: center;
           position: absolute;
-          left: 0;
-          top: 0;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
           background-image: radial-gradient(circle, #ff6188 0%, #fc9867 50%, #ffd866 100%);
           background-attachment: fixed;
           -webkit-text-fill-color: transparent;
           -webkit-background-clip: text;
+          background-clip: text;
           z-index: 9;
           mix-blend-mode: difference;
+          white-space: pre;
+        }
+
+        .ascii-fallback {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #000000;
+        }
+
+        .ascii-fallback-text {
+          font-family: 'IBM Plex Mono', 'Courier New', monospace;
+          font-size: clamp(3rem, 10vw, 8rem);
+          font-weight: 600;
+          color: #fdf9f3;
+          text-align: center;
+          letter-spacing: 0.1em;
+          background-image: radial-gradient(circle, #ff6188 0%, #fc9867 50%, #ffd866 100%);
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
         }
       `}</style>
     </div>

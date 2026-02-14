@@ -1,41 +1,61 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T18:58:40.154Z",
+  "generatedAt": "2026-02-14T19:47:07.879Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Investigate and fix the white/blank screen appearing in the main hero section where the \"KARM\" wordmark is displayed over the FaultyTerminal background, so the hero consistently renders with a dark background and the intended terminal effect across supported browsers/devices.",
+        "summary": "Add a new landing-page UI block placed immediately above the existing ASCII 'KARM' text section that visually matches/blends with the current website style (black background + monochrome glass). The block must resemble the provided React Native `AnalyticsScreen` layout (header + central deck/cards feel), but implemented in the existing React + Tailwind codebase.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-          "frontend/src/components/landing/hero/FaultyTerminal.css",
-          "frontend/src/components/landing/sections/HeroSection.tsx"
+          "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-          "frontend/src/components/landing/hero/FaultyTerminal.css",
-          "frontend/src/components/landing/sections/HeroSection.tsx"
+          "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+          "frontend/src/index.css"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen.",
+        "summary": "Display fake (hard-coded) stats in the new analytics block: Level = 23, Karm = (23*3600), Habits = 4, Challenges = 24. Use these exact values and show Karm as a computed number (not the expression string).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-          "frontend/src/components/landing/hero/FaultyTerminal.css"
+          "frontend/src/components/landing/sections/AnalyticsMockSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-          "frontend/src/components/landing/hero/FaultyTerminal.css"
+          "frontend/src/components/landing/sections/AnalyticsMockSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Implement the blended background/atmosphere for the new analytics block using existing site patterns (e.g., optional subtle snow dots) and ensure it respects reduced-motion preferences similarly to the existing `SnowDotsBackground` effect.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+          "frontend/src/components/landing/hero/SnowDotsBackground.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+          "frontend/src/components/landing/hero/SnowDotsBackground.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Wire the new analytics block into the existing landing page composition by updating the relevant section/component(s) so the placement is 'just above the ASCII text' without altering unrelated sections.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/landing/LandingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/landing/LandingPage.tsx"
         ]
       }
     ]
@@ -45,9 +65,10 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/landing/hero/FaultyTerminal.css",
-    "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-    "frontend/src/components/landing/sections/HeroSection.tsx",
+    "frontend/src/components/landing/LandingPage.tsx",
+    "frontend/src/components/landing/hero/SnowDotsBackground.tsx",
+    "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+    "frontend/src/index.css",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

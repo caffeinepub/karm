@@ -59,10 +59,15 @@
     
     html {
         scroll-behavior: smooth;
+        background-color: #000000 !important;
     }
     
     body {
         @apply bg-black text-foreground antialiased;
+        background-color: #000000 !important;
+    }
+    
+    #root {
         background-color: #000000;
     }
 }
@@ -187,6 +192,71 @@
     @media (hover: none) {
         .cursor-glow {
             display: none;
+        }
+    }
+
+    /* KARM ASCII section dark background enforcement */
+    .ascii-karm-section {
+        background-color: #000000 !important;
+    }
+
+    .ascii-karm-section * {
+        box-sizing: border-box;
+    }
+
+    /* Ensure ASCII container and all children maintain dark background */
+    .ascii-text-container,
+    .ascii-text-container > div {
+        background-color: #000000 !important;
+    }
+
+    /* Hide internal processing canvases completely */
+    .ascii-webgl-canvas,
+    .ascii-processing-canvas {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    /* 3D card flip utilities */
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+
+    .transform-style-3d {
+        transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    .rotate-y-180 {
+        transform: rotateY(180deg);
+    }
+
+    /* Reduced motion support for animations */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-fade-in,
+        .animate-slide-up,
+        .animate-float-slow,
+        .premium-cta {
+            animation: none !important;
+        }
+
+        .transition-transform,
+        .transition-all,
+        .transition-opacity {
+            transition: none !important;
+        }
+
+        .rotate-y-180 {
+            transform: none !important;
         }
     }
 }

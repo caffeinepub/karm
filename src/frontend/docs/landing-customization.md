@@ -23,7 +23,7 @@ The install counter is displayed at the top of the page and persists across sess
 
 The landing page follows a cinematic scroll narrative with these sections in order:
 
-1. **Hero** - Fullscreen wordmark with FaultyTerminal WebGL background and primary CTA
+1. **Hero** - Fullscreen wordmark with subtle snow-dots background and primary CTA
 2. **Psychological Hit** - Sequential fade-in of three psychological trigger lines
 3. **What It Does** - Three-column feature showcase (text only)
 4. **ASCII KARM** - Three.js ASCII text renderer with WebGL shaders
@@ -39,18 +39,17 @@ Edit this file to update headlines, taglines, feature descriptions, and social p
 
 ## Background Effects
 
-### Hero Background (FaultyTerminal)
-The hero section uses a custom WebGL terminal effect with glitch, scanline, and mouse-reactive animations.
+### Hero Background (Snow Dots)
+The hero section uses a plain solid black background with a subtle snow-dots overlay. Small white dots drift downward slowly across the hero area, creating a calm, minimal aesthetic.
 
-**Customization options** (in `HeroSection.tsx`):
-- `scale` - Overall zoom level
-- `timeScale` - Animation speed
-- `scanlineIntensity` - Scanline visibility (0-1)
-- `glitchAmount` - Glitch effect strength
-- `tint` - Color tint (hex color)
-- `brightness` - Overall brightness (0-1)
-- `mouseReact` - Enable/disable mouse interaction
-- `mouseStrength` - Mouse effect intensity
+**Features:**
+- Lightweight 2D canvas animation (no WebGL)
+- Respects `prefers-reduced-motion` - animation is disabled or reduced to static dots when the user has motion sensitivity preferences
+- Stays behind hero content (pointer-events: none)
+- Automatically adjusts to viewport size
+
+**Accessibility:**
+The snow animation automatically disables when the user's system has `prefers-reduced-motion: reduce` enabled, showing a minimal static dot field instead.
 
 ### Cursor Glow
 A subtle monochrome cursor glow effect tracks mouse position across the page. It automatically disables on touch devices.

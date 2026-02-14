@@ -1,26 +1,42 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T18:58:40.151Z",
-  "summary": "REQ-1 appears addressed by forcing a dark background behind/within the FaultyTerminal hero area (HeroSection adds an explicit black layer; FaultyTerminal container/canvas get black backgrounds). REQ-2 (graceful WebGL failure fallback + cleanup behavior) is only partially evidenced via CSS; the diff summary does not show runtime detection, fallback activation, or guaranteed cleanup logic in the component code.",
+  "generatedAt": "2026-02-14T19:47:07.877Z",
+  "summary": "A new AnalyticsMockSection was added and inserted immediately before AsciiKarmSection on the landing page, using existing glass styling and SnowDotsBackground. Reduced-motion support was added to SnowDotsBackground. However, due to truncation of the new section file, it is not fully evidenced that the required fake stats (with English labels and exact values) are actually rendered to the user.",
   "missing_requirements": [
     {
       "id": "REQ-2",
-      "requirement": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen; and ensure clean unmount cleanup regardless of init success.",
-      "reason": "The diff shows only fallback styling (.webgl-fallback) but provides no evidence that FaultyTerminal.tsx detects WebGL/shader/program failures, applies the fallback class/UI, or guarantees cleanup of event listeners/animation frames when initialization fails. The TSX file is truncated and does not include any shown fallback/error handling logic.",
+      "requirement": "Display fake (hard-coded) stats in the new analytics block: Level = 23, Karm = 82800, Habits = 4, Challenges = 24, with English labels.",
+      "reason": "The diff shows the stats object is defined (level/karm/habits/challenges), but the provided truncated content does not show any JSX that actually renders the four labeled values to the page.",
       "evidence": [
-        "frontend/src/components/landing/hero/FaultyTerminal.css",
-        "frontend/src/components/landing/hero/FaultyTerminal.tsx (truncated)"
+        "frontend/src/components/landing/sections/AnalyticsMockSection.tsx (truncated)"
       ]
     }
   ],
-  "hallucinated_features": [],
+  "hallucinated_features": [
+    {
+      "description": "Interactive 3D flip card/deck behavior (delayed card flip, deck expanded toggle/blur overlay).",
+      "reason": "The request asked for a blended analytics-style mockup resembling the RN layout, but did not request timed flip animations, 3D transforms, or an expandable deck interaction.",
+      "evidence": [
+        "frontend/src/components/landing/sections/AnalyticsMockSection.tsx (truncated)",
+        "frontend/src/index.css (mentions new 3D card flip utilities per summary)"
+      ]
+    },
+    {
+      "description": "Global/premium CTA styling and glow/animation utilities unrelated to the analytics insertion.",
+      "reason": "BuildRequest focuses on inserting an analytics mock block above the ASCII KARM section; additional CTA glow styling and other global animation utilities are not requested as part of these requirements.",
+      "evidence": [
+        "frontend/src/index.css (truncated)"
+      ]
+    }
+  ],
   "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/landing/hero/FaultyTerminal.css",
-    "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-    "frontend/src/components/landing/sections/HeroSection.tsx",
+    "frontend/src/components/landing/LandingPage.tsx",
+    "frontend/src/components/landing/hero/SnowDotsBackground.tsx",
+    "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+    "frontend/src/index.css",
     "project_state.json"
   ]
 }

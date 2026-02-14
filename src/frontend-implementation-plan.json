@@ -1,51 +1,80 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Stabilize FaultyTerminal hero rendering and add WebGL-failure fallback",
+  "title": "Landing page blended analytics-style stats block above ASCII KARM section",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Eliminate the white/blank flash/block in the hero where the KARM wordmark overlays the FaultyTerminal background, ensuring consistent dark rendering and no new console errors during normal operation.",
+      "summary": "Create a new landing-page analytics-style UI block that matches the site’s monochrome glass styling and resembles the provided AnalyticsScreen layout.",
       "acceptanceCriteria": [
-        "On page load, the hero section does not show a solid white block/flash in the area behind/around the \"KARM\" wordmark.",
-        "The FaultyTerminal background renders correctly (animated terminal effect) on browsers/devices with WebGL support.",
-        "No new console errors are emitted during normal hero rendering (excluding existing unrelated warnings)."
+        "On the landing page, a new stats/mock analytics block appears directly before the ASCII KARM renderer (i.e., above it in the scroll order).",
+        "The new block uses the site’s existing monochrome/glass styling (e.g., `.glass-panel` / `.glass-panel-strong`) and does not look like an unstyled embed.",
+        "No React Native / Expo-specific imports exist in the web code; the UI is recreated using React + Tailwind components.",
+        "The ASCII KARM renderer still renders and behaves as before."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-          "operation": "modify",
-          "description": "Harden WebGL initialization to prevent transient white/transparent canvas states: prefer an opaque WebGL context (avoid alpha transparency where possible), ensure the canvas is painted dark immediately on init (and not left uninitialized), and gate logging so normal successful initialization does not emit new console errors."
+          "path": "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+          "operation": "create",
+          "description": "Add a new landing section implementing an analytics-style block (header + central deck/cards feel) using existing site primitives (use `Section` for consistent spacing/reveal, `ResponsiveContainer` for layout, and `GlassPanel` with `.glass-panel` / `.glass-panel-strong` to match the monochrome glass aesthetic)."
         },
         {
-          "path": "frontend/src/components/landing/hero/FaultyTerminal.css",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Ensure the FaultyTerminal container and canvas have a consistent dark background (e.g., black) to prevent white showing through during first paint, resize, or brief initialization delays."
-        },
-        {
-          "path": "frontend/src/components/landing/sections/HeroSection.tsx",
-          "operation": "modify",
-          "description": "Add an explicit dark background layer for the hero section behind the FaultyTerminal mount area so the hero remains dark even before the WebGL canvas draws its first frame, without changing overall content/CTA layout."
+          "description": "Add any minimal, reusable utility classes needed to help the new analytics block blend with the existing monochrome/glass style (e.g., subtle borders, glows, or card separators) without changing the look/behavior of existing sections."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Add a graceful non-white fallback when FaultyTerminal cannot initialize WebGL or compile/link shaders, and ensure cleanup is safe regardless of init success.",
+      "summary": "Show hard-coded fake stats in the analytics block with exact values and computed Karm.",
       "acceptanceCriteria": [
-        "If WebGL is unavailable or shader/program setup fails, the hero section shows a non-white fallback background (e.g., solid black or subtle dark gradient) and the rest of the hero content remains readable.",
-        "The FaultyTerminal component cleans up event listeners/animation frames without throwing errors when unmounted, regardless of whether it initialized WebGL successfully."
+        "The analytics block shows Level: 23.",
+        "The analytics block shows Karm equal to 82800 (computed from 23*3600).",
+        "The analytics block shows Habits: 4.",
+        "The analytics block shows Challenges: 24.",
+        "All labels and visible text are in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/landing/hero/FaultyTerminal.tsx",
+          "path": "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
           "operation": "modify",
-          "description": "Implement an internal fallback mode when WebGL context creation or shader/program setup fails: render a dark fallback background instead of a blank/white area, avoid throwing, and ensure unmount cleanup is robust even when initialization exits early (cancel RAF safely, disconnect observers, and only delete WebGL resources if they were created)."
+          "description": "Render the fake stats in the analytics UI: Level = 23, Karm displayed as the computed number from 23*3600 (82800), Habits = 4, Challenges = 24; ensure all labels are English and values are hard-coded (no backend calls)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Blend the new analytics block’s background/atmosphere using existing site patterns and ensure reduced-motion compliance.",
+      "acceptanceCriteria": [
+        "If an animated background effect is used in the analytics block, it disables or becomes static when the user prefers reduced motion.",
+        "The analytics block content remains readable with sufficient contrast against the background."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+          "operation": "modify",
+          "description": "Add an atmospheric background treatment behind the analytics block that matches the site (e.g., reuse `SnowDotsBackground` subtly behind content with appropriate opacity and layering, plus any non-animated gradient/vignette overlays) while keeping text/card contrast high."
         },
         {
-          "path": "frontend/src/components/landing/hero/FaultyTerminal.css",
+          "path": "frontend/src/components/landing/hero/SnowDotsBackground.tsx",
           "operation": "modify",
-          "description": "Add styling for the fallback state (dark solid/gradient background) that matches the hero aesthetic and guarantees readability of overlaid hero text."
+          "description": "Refine reduced-motion behavior so the snow dots effect becomes static (or otherwise non-animated) when `prefers-reduced-motion: reduce` is enabled, maintaining the existing hero usage while ensuring accessibility expectations for the new analytics block."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Insert the analytics block into the landing page immediately above the existing ASCII KARM section without reordering other sections.",
+      "acceptanceCriteria": [
+        "LandingPage order results in the analytics block appearing immediately before the ASCII KARM section.",
+        "No other landing sections are removed or reordered besides inserting this new block in the correct position."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/landing/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Wire `AnalyticsMockSection` into the landing composition by importing and rendering it immediately before `AsciiKarmSection`, leaving all other sections intact and in the same order."
         }
       ]
     }

@@ -2,12 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-investigate-and-fix-the-white-blank-screen-appearing-in-the-main-hero-section-where-the-karm-wordmark-is-displayed-over-the-faultyterminal-background-so-the-hero-consistently-renders-with-a-dark-background-and-the-intended-terminal-effect-across-supported-browsers-devices",
-      "featureTitle": "Investigate and fix the white/blank screen appearing in the main hero section where the \"KARM\" wordmark is displayed over the FaultyTerminal background, so the hero consistently renders with a dark background and the intended terminal effect across supported browsers/devices.",
+      "featureId": "feature-add-a-new-landing-page-ui-block-placed-immediately-above-the-existing-ascii-karm-text-section-that-visually-matches-blends-with-the-current-website-style-black-background-monochrome-glass-the-block-must-resemble-the-provided-react-native-analyticsscreen-layout-header-central-deck-cards-feel-but-implemented-in-the-existing-react-tailwind-codebase",
+      "featureTitle": "Add a new landing-page UI block placed immediately above the existing ASCII 'KARM' text section that visually matches/blends with the current website style (black background + monochrome glass). The block must resemble the provided React Native `AnalyticsScreen` layout (header + central deck/cards feel), but implemented in the existing React + Tailwind codebase.",
       "files": [
-        "frontend/src/components/landing/hero/FaultyTerminal.css",
-        "frontend/src/components/landing/hero/FaultyTerminal.tsx",
-        "frontend/src/components/landing/sections/HeroSection.tsx"
+        "frontend/src/components/landing/sections/AnalyticsMockSection.tsx",
+        "frontend/src/index.css"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -22,11 +21,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-a-graceful-fallback-for-the-faultyterminal-component-when-webgl-context-creation-shader-compilation-or-program-linking-fails-ensuring-the-hero-section-still-displays-a-dark-visually-coherent-background-instead-of-a-white-blank-screen",
-      "featureTitle": "Add a graceful fallback for the FaultyTerminal component when WebGL context creation, shader compilation, or program linking fails, ensuring the hero section still displays a dark, visually coherent background instead of a white/blank screen.",
+      "featureId": "feature-display-fake-hard-coded-stats-in-the-new-analytics-block-level-23-karm-23-3600-habits-4-challenges-24-use-these-exact-values-and-show-karm-as-a-computed-number-not-the-expression-string",
+      "featureTitle": "Display fake (hard-coded) stats in the new analytics block: Level = 23, Karm = (23*3600), Habits = 4, Challenges = 24. Use these exact values and show Karm as a computed number (not the expression string).",
       "files": [
-        "frontend/src/components/landing/hero/FaultyTerminal.css",
-        "frontend/src/components/landing/hero/FaultyTerminal.tsx"
+        "frontend/src/components/landing/sections/AnalyticsMockSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -37,6 +35,43 @@
       ],
       "testIds": [
         "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-blended-background-atmosphere-for-the-new-analytics-block-using-existing-site-patterns-e-g-optional-subtle-snow-dots-and-ensure-it-respects-reduced-motion-preferences-similarly-to-the-existing-snowdotsbackground-effect",
+      "featureTitle": "Implement the blended background/atmosphere for the new analytics block using existing site patterns (e.g., optional subtle snow dots) and ensure it respects reduced-motion preferences similarly to the existing `SnowDotsBackground` effect.",
+      "files": [
+        "frontend/src/components/landing/hero/SnowDotsBackground.tsx",
+        "frontend/src/components/landing/sections/AnalyticsMockSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wire-the-new-analytics-block-into-the-existing-landing-page-composition-by-updating-the-relevant-section-component-s-so-the-placement-is-just-above-the-ascii-text-without-altering-unrelated-sections",
+      "featureTitle": "Wire the new analytics block into the existing landing page composition by updating the relevant section/component(s) so the placement is 'just above the ASCII text' without altering unrelated sections.",
+      "files": [
+        "frontend/src/components/landing/LandingPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }
