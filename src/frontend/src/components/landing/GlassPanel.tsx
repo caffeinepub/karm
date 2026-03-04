@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 interface GlassPanelProps {
   children: ReactNode;
@@ -6,9 +6,15 @@ interface GlassPanelProps {
   strong?: boolean;
 }
 
-export default function GlassPanel({ children, className = '', strong = false }: GlassPanelProps) {
+export default function GlassPanel({
+  children,
+  className = "",
+  strong = false,
+}: GlassPanelProps) {
   return (
-    <div className={`${strong ? 'glass-panel-strong' : 'glass-panel'} ${className}`}>
+    <div
+      className={`${strong ? "galaxy-glass-strong" : "galaxy-glass"} ${className}`}
+    >
       {children}
     </div>
   );

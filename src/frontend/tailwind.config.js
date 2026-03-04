@@ -48,6 +48,16 @@ export default {
                 card: {
                     DEFAULT: 'oklch(var(--card))',
                     foreground: 'oklch(var(--card-foreground))'
+                },
+                // Galaxy blue palette utilities
+                galaxy: {
+                    bg: '#030514',
+                    'bg-mid': '#0a1020',
+                    'bg-light': '#141b2b',
+                    border: 'rgba(100, 150, 255, 0.15)',
+                    text: 'rgba(220, 235, 255, 0.92)',
+                    accent: 'rgba(100, 150, 255, 0.5)',
+                    'accent-soft': 'rgba(150, 200, 255, 0.4)',
                 }
             },
             fontFamily: {
@@ -70,8 +80,9 @@ export default {
             },
             boxShadow: {
                 xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-                glow: '0 0 60px rgba(255, 255, 255, 0.05)',
-                'glow-strong': '0 0 80px rgba(255, 255, 255, 0.08)'
+                glow: '0 0 60px rgba(100, 150, 255, 0.08)',
+                'glow-strong': '0 0 80px rgba(100, 150, 255, 0.15)',
+                'galaxy-border': '0 0 0 1px rgba(100, 150, 255, 0.15)',
             },
             spacing: {
                 '18': '4.5rem',

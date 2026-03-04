@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface SnowDot {
   x: number;
@@ -16,29 +16,29 @@ export default function SnowDotsBackground() {
 
   useEffect(() => {
     // Check for reduced motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);
     };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Set canvas size
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      
+
       // Reinitialize dots on resize
       initDots();
     };
@@ -46,7 +46,7 @@ export default function SnowDotsBackground() {
     const initDots = () => {
       const dotCount = prefersReducedMotion ? 20 : 50; // Fewer dots if reduced motion
       dotsRef.current = [];
-      
+
       for (let i = 0; i < dotCount; i++) {
         dotsRef.current.push({
           x: Math.random() * canvas.width,
@@ -59,7 +59,7 @@ export default function SnowDotsBackground() {
     };
 
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
 
     // Animation loop
     const animate = () => {
@@ -69,7 +69,7 @@ export default function SnowDotsBackground() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw and update dots
-      dotsRef.current.forEach((dot) => {
+      for (const dot of dotsRef.current) {
         // Draw dot
         ctx.fillStyle = `rgba(255, 255, 255, ${dot.opacity})`;
         ctx.beginPath();
@@ -86,7 +86,7 @@ export default function SnowDotsBackground() {
             dot.x = Math.random() * canvas.width;
           }
         }
-      });
+      }
 
       rafRef.current = requestAnimationFrame(animate);
     };
@@ -94,7 +94,7 @@ export default function SnowDotsBackground() {
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }

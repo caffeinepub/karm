@@ -1,6 +1,9 @@
-import { useEffect, useState, RefObject } from 'react';
+import { type RefObject, useEffect, useState } from "react";
 
-export function useScrollReveal(ref: RefObject<HTMLElement | null>, threshold = 0.1) {
+export function useScrollReveal(
+  ref: RefObject<HTMLElement | null>,
+  threshold = 0.1,
+) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -17,8 +20,8 @@ export function useScrollReveal(ref: RefObject<HTMLElement | null>, threshold = 
       },
       {
         threshold,
-        rootMargin: '0px 0px -100px 0px',
-      }
+        rootMargin: "0px 0px -100px 0px",
+      },
     );
 
     observer.observe(element);

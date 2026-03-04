@@ -1,5 +1,8 @@
+
+
+
 actor {
-  var installCount = 24;
+  var installCount = 56;
 
   public query ({ caller }) func getInstallCount() : async Nat {
     installCount;

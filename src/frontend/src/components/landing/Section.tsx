@@ -1,5 +1,5 @@
-import { ReactNode, useRef, CSSProperties } from 'react';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { type CSSProperties, type ReactNode, useRef } from "react";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 interface SectionProps {
   id: string;
@@ -8,7 +8,12 @@ interface SectionProps {
   style?: CSSProperties;
 }
 
-export default function Section({ id, children, className = '', style }: SectionProps) {
+export default function Section({
+  id,
+  children,
+  className = "",
+  style,
+}: SectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useScrollReveal(sectionRef);
 
@@ -17,7 +22,7 @@ export default function Section({ id, children, className = '', style }: Section
       id={id}
       ref={sectionRef}
       className={`relative py-24 md:py-32 lg:py-40 transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       } ${className}`}
       style={style}
     >

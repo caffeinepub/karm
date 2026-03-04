@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface RingTimerProps {
   size?: number;
@@ -7,11 +7,11 @@ interface RingTimerProps {
   className?: string;
 }
 
-export default function RingTimer({ 
-  size = 280, 
-  progress01 = 0.25, 
+export default function RingTimer({
+  size = 280,
+  progress01 = 0.25,
   animate = false,
-  className = '' 
+  className = "",
 }: RingTimerProps) {
   const [orbitAngle, setOrbitAngle] = useState(0);
   const rafRef = useRef<number>(0);
@@ -20,15 +20,15 @@ export default function RingTimer({
 
   // Check for reduced motion preference
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);
     };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   // Orbit animation loop
@@ -73,8 +73,8 @@ export default function RingTimer({
 
   return (
     <div className={className} style={{ width: size, height: size }}>
-      <svg 
-        width={size} 
+      <svg
+        width={size}
         height={size}
         aria-label="Focus timer indicator"
         role="img"
@@ -125,10 +125,10 @@ export default function RingTimer({
 
         {/* Orbiting dot */}
         {animate && !prefersReducedMotion && (
-          <circle 
-            cx={ballX} 
-            cy={ballY} 
-            r={4.5} 
+          <circle
+            cx={ballX}
+            cy={ballY}
+            r={4.5}
             fill="rgba(255,255,255,0.95)"
             aria-label="Orbit indicator"
           />

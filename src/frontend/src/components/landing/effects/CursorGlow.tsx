@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function CursorGlow() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -6,7 +6,7 @@ export default function CursorGlow() {
 
   useEffect(() => {
     // Check if device supports hover (not touch)
-    const hasHover = window.matchMedia('(hover: hover)').matches;
+    const hasHover = window.matchMedia("(hover: hover)").matches;
     if (!hasHover) return;
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -18,12 +18,12 @@ export default function CursorGlow() {
       setIsVisible(false);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [isVisible]);
 

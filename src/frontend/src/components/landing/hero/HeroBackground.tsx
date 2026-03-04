@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -7,7 +7,7 @@ export default function HeroBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Set canvas size
@@ -16,7 +16,7 @@ export default function HeroBackground() {
       canvas.height = window.innerHeight;
     };
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     // Reduced particle system - 60% fewer particles
     const particles: Array<{
@@ -43,11 +43,11 @@ export default function HeroBackground() {
     let animationFrameId: number;
 
     const animate = () => {
-      ctx.fillStyle = '#000000';
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw particles with blur effect
-      particles.forEach((particle) => {
+      for (const particle of particles) {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
@@ -59,13 +59,13 @@ export default function HeroBackground() {
 
         // Draw particle with soft blur
         ctx.save();
-        ctx.filter = 'blur(1.5px)';
+        ctx.filter = "blur(1.5px)";
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
         ctx.fill();
         ctx.restore();
-      });
+      }
 
       // Draw subtle blue/white aura in center
       const gradient = ctx.createRadialGradient(
@@ -74,11 +74,11 @@ export default function HeroBackground() {
         0,
         canvas.width / 2,
         canvas.height / 2,
-        canvas.width / 2
+        canvas.width / 2,
       );
-      gradient.addColorStop(0, 'rgba(200, 220, 255, 0.015)'); // Very subtle blue-white
-      gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.008)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      gradient.addColorStop(0, "rgba(200, 220, 255, 0.015)"); // Very subtle blue-white
+      gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.008)");
+      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -88,7 +88,7 @@ export default function HeroBackground() {
     animate();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -97,7 +97,7 @@ export default function HeroBackground() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ background: '#000000' }}
+      style={{ background: "#000000" }}
     />
   );
 }
