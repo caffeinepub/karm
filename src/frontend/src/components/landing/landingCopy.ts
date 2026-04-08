@@ -3,7 +3,7 @@ export const LANDING_COPY = {
     brand: "KARM",
     tagline: "Stop overthinking. Start working.",
     killerLine: "If you open this, you work.",
-    primaryCTA: "Download APK",
+    primaryCTA: null,
     secondaryCTA: "Watch Proof",
     builderLine:
       "v1 — built by a student. for people who refuse to stay average.",

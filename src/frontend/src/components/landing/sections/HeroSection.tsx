@@ -1,16 +1,14 @@
-import { useInstallCount } from "@/hooks/useInstallCount";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import ResponsiveContainer from "../ResponsiveContainer";
 import Section from "../Section";
-import { downloadAPK } from "../download";
+import FloatingComments from "../effects/FloatingComments";
 import FocusLine from "../hero/FocusLine";
 import RingTimer from "../hero/RingTimer";
 import { LANDING_CONFIG } from "../landingConfig";
 import { LANDING_COPY } from "../landingCopy";
 
 export default function HeroSection() {
-  const { increment } = useInstallCount();
   const [startOrbitAnimation, setStartOrbitAnimation] = useState(false);
 
   // Delay orbit animation start by 2 seconds
@@ -21,11 +19,6 @@ export default function HeroSection() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const handleDownloadClick = () => {
-    downloadAPK();
-    increment();
-  };
 
   const handleSecondaryCTA = () => {
     const { secondaryCTA } = LANDING_CONFIG.hero;
@@ -41,8 +34,11 @@ export default function HeroSection() {
     <Section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", position: "relative" }}
     >
+      {/* Floating comments — absolute, clipped inside hero section */}
+      <FloatingComments />
+
       <ResponsiveContainer className="relative z-10">
         <div className="flex flex-col items-center text-center space-y-6 py-20">
           {/* Wordmark */}
@@ -79,15 +75,19 @@ export default function HeroSection() {
           <FocusLine />
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <button
-              type="button"
-              onClick={handleDownloadClick}
-              className="galaxy-cta px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 justify-center"
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 items-center">
+            {/* Coming soon text — replaces download button */}
+            <span
+              style={{
+                color: "rgba(150,200,255,0.45)",
+                fontSize: "13px",
+                letterSpacing: "2.5px",
+                fontFamily: "monospace",
+                textTransform: "lowercase",
+              }}
             >
-              <Download className="w-5 h-5" />
-              Download KARM
-            </button>
+              coming soon. working in the shadows
+            </span>
 
             <button
               type="button"

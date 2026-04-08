@@ -20,14 +20,10 @@ export const LANDING_CONFIG = {
    * Hero Section Configuration
    */
   hero: {
-    // Primary CTA action: opens the fixed Google Drive link
-    primaryCTA: {
-      action: "download" as const,
-    },
     // Secondary CTA action: scroll to a section
     secondaryCTA: {
       action: "scroll" as const,
-      scrollTarget: "what-it-does",
+      scrollTarget: "timer-section",
     },
   },
 };
@@ -36,4 +32,3 @@ export const LANDING_CONFIG = {
  * Type definitions for configuration
  */
 export type SecondaryCTAAction = "scroll";
-export type PrimaryCTAAction = "download";

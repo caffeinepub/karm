@@ -1,0 +1,4 @@
+service : {
+  getInstallCount: () -> (nat) query;
+  incrementInstallCount: () -> (nat);
+}

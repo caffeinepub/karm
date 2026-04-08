@@ -35,13 +35,14 @@ const COMMENTS: CommentEntry[] = [
   { username: "@sarthakgameslover2619", text: "How to download it" },
 ];
 
+const MAX_COMMENTS = 8;
+
 interface ActiveComment {
   id: number;
   comment: CommentEntry;
   leftPercent: number;
-  startY: number; // px from bottom
-  duration: number; // ms
-  spawnedAt: number; // timestamp
+  topPercent: number;
+  bobOffset: number;
 }
 
 let globalIdCounter = 0;
@@ -49,44 +50,42 @@ let globalIdCounter = 0;
 export default function FloatingComments() {
   const [activeComments, setActiveComments] = useState<ActiveComment[]>([]);
   const commentIndexRef = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  // Track count via ref so spawn logic doesn't need activeComments in deps
+  const activeCountRef = useRef(0);
 
   useEffect(() => {
-    // Spawn initial burst of comments spread across time
     const spawnComment = () => {
+      if (activeCountRef.current >= MAX_COMMENTS) return;
+
       const idx = commentIndexRef.current % COMMENTS.length;
       commentIndexRef.current += 1;
 
       const id = ++globalIdCounter;
-      const leftPercent = 5 + Math.random() * 65; // keep within 5%–70% so it doesn't clip right edge
-      const duration = 6000 + Math.random() * 4000; // 6–10s float up
+      const leftPercent = 5 + Math.random() * 62;
+      const topPercent = 10 + Math.random() * 72;
+      const bobOffset = 6 + Math.random() * 8;
 
+      activeCountRef.current += 1;
       setActiveComments((prev) => [
         ...prev,
-        {
-          id,
-          comment: COMMENTS[idx],
-          leftPercent,
-          startY: 0,
-          duration,
-          spawnedAt: Date.now(),
-        },
+        { id, comment: COMMENTS[idx], leftPercent, topPercent, bobOffset },
       ]);
 
-      // Remove comment after animation completes
+      // Total: 0.8s fade-in + 2.5s hold + 0.8s fade-out = 4.1s
       setTimeout(() => {
+        activeCountRef.current -= 1;
         setActiveComments((prev) => prev.filter((c) => c.id !== id));
-      }, duration + 500);
+      }, 4200);
     };
 
-    // Spawn first few immediately with stagger
-    const initialDelays = [0, 800, 1600, 2600, 3800, 5200];
+    // Staggered initial burst
+    const initialDelays = [0, 600, 1300, 2100, 3000];
     const initialTimers = initialDelays.map((delay) =>
       setTimeout(spawnComment, delay),
     );
 
-    // Then spawn continuously
-    const interval = setInterval(spawnComment, 2200);
+    // Continuous spawn every 2s
+    const interval = setInterval(spawnComment, 2000);
 
     return () => {
       initialTimers.forEach(clearTimeout);
@@ -96,14 +95,13 @@ export default function FloatingComments() {
 
   return (
     <div
-      ref={containerRef}
       aria-hidden="true"
       style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         pointerEvents: "none",
-        zIndex: 40,
         overflow: "hidden",
+        zIndex: 10,
       }}
     >
       {activeComments.map((ac) => (
@@ -114,36 +112,32 @@ export default function FloatingComments() {
 }
 
 function FloatingBubble({ item }: { item: ActiveComment }) {
-  const animName = `float-comment-${item.id}`;
+  const fadeAnimName = `karm-fade-${item.id}`;
+  const bobAnimName = `karm-bob-${item.id}`;
 
   return (
     <>
       <style>{`
-        @keyframes ${animName} {
-          0% {
-            transform: translateY(0px);
-            opacity: 0;
-          }
-          8% {
-            opacity: 1;
-          }
-          80% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-${Math.floor(window.innerHeight * 0.85)}px);
-            opacity: 0;
-          }
+        @keyframes ${fadeAnimName} {
+          0%   { opacity: 0; }
+          19%  { opacity: 1; }
+          80%  { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        @keyframes ${bobAnimName} {
+          0%   { transform: translateY(0px); }
+          50%  { transform: translateY(-${item.bobOffset}px); }
+          100% { transform: translateY(0px); }
         }
       `}</style>
       <div
         style={{
           position: "absolute",
-          bottom: "8%",
           left: `${item.leftPercent}%`,
-          animation: `${animName} ${item.duration}ms ease-out forwards`,
+          top: `${item.topPercent}%`,
+          animation: `${fadeAnimName} 4.1s ease-in-out forwards, ${bobAnimName} 3.2s ease-in-out infinite`,
           maxWidth: "260px",
-          minWidth: "140px",
+          minWidth: "130px",
         }}
       >
         <div
